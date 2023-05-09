@@ -1,0 +1,20 @@
+{
+  "name" : "gutierrezanthony/328/secondhand-books",
+  "authors" : [
+    {
+      "name" : "Anthony Gutierrez",
+      "email" : "gutierrezanthony715@gmail.com"
+    },
+    {
+      "name" : "Mehdi Jokar",
+      "email" : "jokar.mehdi2@gmail.com"
+    },
+    {
+      "name" : "Thanh Doan",
+      "email" : "duythanhhodoan@gmail.com"
+    }
+  ],
+  "require" : {
+      "bcosca/fatfree-core": "dev-master"
+  }
+}

@@ -1,0 +1,10 @@
+# this file will contain any files and folders that should be excluded
+# from version control
+
+# files and directory you want to ignore
+# Directories
+vendor/
+tmp/
+
+# Files
+composer.lock

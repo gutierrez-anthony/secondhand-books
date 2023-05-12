@@ -17,7 +17,11 @@ require_once('vendor/autoload.php');
 $f3 = Base::instance();
 
 // Define a default route for home
-$f3->route('GET /', function() {
+$f3->route('GET /', function($f3) {
+
+
+    $f3->set("title", "Home");
+
     // Define a view page
     $view = new Template();
     echo $view->render('views/home.html');

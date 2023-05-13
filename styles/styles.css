@@ -1,5 +1,28 @@
+html{
+    height: 100%;
+    box-sizing: border-box;
+}
+
+main{
+    width: inherit;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
 body {
     background: #caf0f8;
+    margin: 0;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 10rem;
+    box-sizing: inherit;
+}
+
+
+footer {
+    position: absolute;
+    bottom: 0;
 }
 
 a img {
@@ -16,5 +39,9 @@ a img {
 }
 
 .dark-blue-bg{
-    background-color: darkblue !important;
+    background-color: #03045e !important;
+}
+
+.text-color-dark{
+    color: #03045e !important;
 }

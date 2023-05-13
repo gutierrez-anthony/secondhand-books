@@ -7,6 +7,7 @@ Date: 5/8/2023
 <include href="views/includes/header.html"></include>
 
 <!-- Add a book taken from the array in the model-->
+<main class="mb-5">
 <div class="d-flex flex-row flex-wrap mt-2">
 <repeat group="{{ @books }}" value="{{ @book }}">
     <div class="card m-3">
@@ -22,5 +23,6 @@ Date: 5/8/2023
     </div>
 </repeat>
 </div>
+</main>
 
 <include href="views/includes/footer.html"></include>

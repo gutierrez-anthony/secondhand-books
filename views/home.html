@@ -7,8 +7,9 @@ Date: 5/8/2023
 <include href="views/includes/header.html"></include>
 
 <!-- Add a book taken from the array in the model-->
+<div class="d-flex flex-row flex-wrap mt-2">
 <repeat group="{{ @books }}" value="{{ @book }}">
-    <div class="card">
+    <div class="card m-3">
         <img src="images/default_book.jpg" class="card-img-top" alt="">
         <div class="card-body m-auto">
             <h5 class="card-title">{{ ucfirst(@book) }}</h5>
@@ -20,5 +21,6 @@ Date: 5/8/2023
         </div>
     </div>
 </repeat>
+</div>
 
 <include href="views/includes/footer.html"></include>

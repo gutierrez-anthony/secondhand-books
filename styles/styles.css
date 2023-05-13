@@ -14,3 +14,7 @@ a img {
     margin: 0 auto;
     width: 10rem;
 }
+
+.dark-blue-bg{
+    background-color: darkblue !important;
+}

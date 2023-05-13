@@ -6,4 +6,19 @@ Date: 5/8/2023
 -->
 <include href="views/includes/header.html"></include>
 
+<!-- Add a book taken from the array in the model-->
+<repeat group="{{ @books }}" value="{{ @book }}">
+    <div class="card">
+        <img src="images/default_book.jpg" class="card-img-top" alt="">
+        <div class="card-body m-auto">
+            <h5 class="card-title">{{ ucfirst(@book) }}</h5>
+            <p class="card-text">Author
+                <br>
+                Edition
+            </p>
+            <a href="#" class="btn btn-primary">More Details</a>
+        </div>
+    </div>
+</repeat>
+
 <include href="views/includes/footer.html"></include>

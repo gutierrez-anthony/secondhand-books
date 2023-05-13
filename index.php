@@ -19,8 +19,11 @@ $f3 = Base::instance();
 // Define a default route for home
 $f3->route('GET /', function($f3) {
 
+    // Set the title of the page
+    $f3->set('title', "Home");
 
-    $f3->set("title", "Home");
+    // Get the data from the model and add to a new card
+    $f3->set('books', getBooks());
 
     // Define a view page
     $view = new Template();

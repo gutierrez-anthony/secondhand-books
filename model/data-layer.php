@@ -1,3 +1,9 @@
+<!--
+PHP function for the Secondhand Book Home page.
+Author: Anthony Gutierrez, Mehdi Jokar, Thanh Doan
+File: home.html
+Date: 5/12/2023
+-->
 <?php
 function getBooks()
 {

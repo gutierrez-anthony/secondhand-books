@@ -31,5 +31,24 @@ $f3->route('GET /', function($f3) {
     echo $view->render('views/home.html');
 });
 
+// Define a default route for home
+$f3->route('GET /home', function($f3) {
+
+    //Redirect to the default route
+    $f3->reroute('/');
+});
+
+// Define an about-us route
+$f3->route('GET /about-us', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "About Us");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/about-us.html');
+});
+
 // Run Fat-Free
 $f3 -> run();

@@ -7,8 +7,8 @@ Date: 5/8/2023
 <include href="views/includes/header.html"></include>
 
 <!-- Add a book taken from the array in the model-->
-<main class="mb-5">
-<div class="d-flex flex-row flex-wrap mt-2">
+<main class="container-fluid mb-5">
+<div class="d-flex flex-row flex-wrap justify-content-center mt-2">
 <repeat group="{{ @books }}" value="{{ @book }}">
     <div class="card m-3">
         <img src="images/default_book.jpg" class="card-img-top" alt="">
@@ -26,3 +26,4 @@ Date: 5/8/2023
 </main>
 
 <include href="views/includes/footer.html"></include>
+

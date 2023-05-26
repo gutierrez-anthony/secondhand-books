@@ -50,5 +50,17 @@ $f3->route('GET /about-us', function($f3) {
     echo $view->render('views/about-us.html');
 });
 
+// Define a book route
+$f3->route('GET /book', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "Book Information");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/book.html');
+});
+
 // Run Fat-Free
 $f3 -> run();

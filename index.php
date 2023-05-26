@@ -88,5 +88,18 @@ $f3->route('GET /faq', function($f3) {
     echo $view->render('views/faq.html');
 });
 
+
+// Define a contact-us route
+$f3->route('GET|POST /contact-us', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "Contact Us");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/contact-us.html');
+});
+
 // Run Fat-Free
 $f3 -> run();

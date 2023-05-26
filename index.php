@@ -75,5 +75,18 @@ $f3->route('GET /terms-of-services', function($f3) {
     echo $view->render('views/terms-of-services.html');
 });
 
+
+// Define a faq route
+$f3->route('GET /faq', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "FAQ");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/faq.html');
+});
+
 // Run Fat-Free
 $f3 -> run();

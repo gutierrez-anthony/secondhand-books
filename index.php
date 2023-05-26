@@ -62,5 +62,18 @@ $f3->route('GET /book', function($f3) {
     echo $view->render('views/book.html');
 });
 
+
+// Define a terms-of-services route
+$f3->route('GET /terms-of-services', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "Terms of Services");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/terms-of-services.html');
+});
+
 // Run Fat-Free
 $f3 -> run();

@@ -1,0 +1,44 @@
+<!--
+HTML markup for the Secondhand Book About Us page.
+Author: Anthony Gutierrez, Mehdi Jokar
+File: contact-owner.html
+Date: 5/25/2023
+-->
+<include href="views/includes/header.html"></include>
+
+
+<main class="container-fluid mb-5">
+  <div class="container w-75">
+    <h1>Contact Owner</h1>
+    <br>
+    <br>
+    <form>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name*</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email*</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone number</label>
+        <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+      </div>
+      <div class="mb-3">
+        <label for="subject" class="form-label">Subject</label>
+        <input type="text" class="form-control" id="subject" placeholder="Enter the subject" value="automatically generated" readonly>
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Message*</label>
+        <textarea class="form-control" id="message" rows="5" placeholder="Enter your message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary dark-blue-bg float-end">Send</button>
+    </form>
+  </div>
+  <br>
+  <br>
+  <br>
+</main>
+
+<include href="views/includes/footer.html"></include>

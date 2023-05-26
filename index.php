@@ -114,5 +114,17 @@ $f3->route('GET|POST /contact-owner', function($f3) {
     echo $view->render('views/contact-owner.html');
 });
 
+// Define a login route
+$f3->route('GET|POST /login', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "LogIn");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/login.html');
+});
+
 // Run Fat-Free
 $f3 -> run();

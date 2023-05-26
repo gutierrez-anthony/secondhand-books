@@ -1,0 +1,54 @@
+<!--
+HTML markup for the Secondhand Book Sign Up page.
+Author: Anthony Gutierrez, Mehdi Jokar
+File: register.html
+Date: 5/25/2023
+-->
+<include href="views/includes/header.html"></include>
+
+
+<main class="container-fluid mb-5">
+  <div class="container w-75">
+    <h1>Register</h1>
+    <br>
+    <br>
+    <form>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="firstName" class="form-label">First Name*</label>
+          <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="lastName" class="form-label">Last Name*</label>
+          <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email*</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Phone Number</label>
+        <input type="text" class="form-control" id="phoneNumber" placeholder="Enter your phone number">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password*</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password*</label>
+        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <textarea class="form-control" id="address" rows="3" placeholder="Enter your address"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary dark-blue-bg float-end">Register</button>
+    </form>
+  </div>
+  <br>
+  <br>
+  <br>
+</main>
+
+<include href="views/includes/footer.html"></include>

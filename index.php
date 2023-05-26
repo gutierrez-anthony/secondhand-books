@@ -1,6 +1,8 @@
 <?php
 /**
- * @author Anthony Gutierrez, Mehdi Jokar, Thanh Doan
+ * @author Anthony Gutierrez
+ * @auther Mehdi Jokar
+ *
  * Created 5/8/2023
  * 328/secondhand-books/index.php
  * Controller for Sleeping Donuts project
@@ -33,6 +35,9 @@ $f3->route('GET /', function($f3) {
 
 // Define a default route for home
 $f3->route('GET /home', function($f3) {
+
+    // Get the data from the model and add to a new card
+    $f3->set('books', getBooks());
 
     //Redirect to the default route
     $f3->reroute('/');
@@ -124,6 +129,18 @@ $f3->route('GET|POST /login', function($f3) {
     // Define a view page
     $view = new Template();
     echo $view->render('views/login.html');
+});
+
+// Define a register route
+$f3->route('GET|POST /register', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "Register");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/register.html');
 });
 
 // Run Fat-Free

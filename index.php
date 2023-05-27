@@ -143,5 +143,70 @@ $f3->route('GET|POST /register', function($f3) {
     echo $view->render('views/register.html');
 });
 
+// Define a profile route
+$f3->route('GET|POST /profile', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "Profile");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/profile.html');
+});
+
+// Define an add-book route
+$f3->route('GET|POST /add-book', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "Add Book");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/add-book.html');
+});
+
+
+// Define a search-results route
+$f3->route('GET|POST /search-results', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "Search Results");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/search-results.html');
+});
+
+
+// Define a admin-dashboard route
+$f3->route('GET|POST /admin-dashboard', function($f3) {
+
+    // Set the title of the page
+    $f3->set('title', "Admin Dashboard");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/admin-dashboard.html');
+});
+
+// Define a lists route
+$f3->route('GET|POST /lists', function($f3) {
+
+    // Get the data from the model and add to a new card
+    $f3->set('books', getBooks());
+
+    // Set the title of the page
+    $f3->set('title', "Lists");
+
+
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/lists.html');
+});
+
 // Run Fat-Free
 $f3 -> run();

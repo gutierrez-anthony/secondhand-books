@@ -50,10 +50,19 @@ a img {
     background-color: #03045e !important;
 }
 
+.dark-red-bg{
+    background-color: maroon !important;
+}
+
 .text-color-dark{
     color: #03045e !important;
 }
 
 .text-justify{
     text-align: justify !important;
+}
+
+.form-check-input:checked {
+    background-color: #03045e !important;
+    border-color: #03045e !important;
 }

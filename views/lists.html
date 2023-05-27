@@ -1,0 +1,54 @@
+<!--
+HTML markup for the Secondhand Book Lists page.
+Author: Anthony Gutierrez, Mehdi Jokar
+File: lists.html
+Date: 5/26/2023
+-->
+<include href="views/includes/header.html"></include>
+
+
+<main class="container-fluid mb-5">
+  <div class="container w-75">
+
+    <br>
+    <br>
+
+<form>
+      <div class="row">
+        <div class="col-3"><label for="sort" class="form-label"><b class="text-color-dark">Sort By:</b></label></div>
+        <div class="col-6">
+
+          <select class="form-select" id="sort">
+            <option value="title">Title</option>
+            <option value="authors">Authors</option>
+            <option value="department">Department</option>
+            <option value="subject">Subject</option>
+            <option value="price">Price</option>
+          </select>
+        </div>
+        <div class="col-3"><button type="submit" class="btn btn-primary dark-blue-bg">Go</button></div>
+      </div>
+</form>
+    <div class="d-flex flex-row flex-wrap justify-content-center mt-2">
+      <repeat group="{{ @books }}" value="{{ @book }}">
+        <div class="card m-3">
+          <img src="images/default_book.jpg" class="card-img-top" alt="default_book.jpg">
+          <div class="card-body m-auto">
+            <h5 class="card-title">{{ ucfirst(@book) }}</h5>
+            <p class="card-text">Author
+              <br>
+              Edition
+            </p>
+            <a href="#" class="btn btn-primary dark-blue-bg">More Details</a>
+          </div>
+        </div>
+      </repeat>
+
+
+  </div>
+  <br>
+  <br>
+  <br>
+</main>
+
+<include href="views/includes/footer.html"></include>

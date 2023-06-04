@@ -12,36 +12,36 @@ Date: 5/26/2023
         <h1>Profile</h1>
         <br>
         <br>
-        <form>
+        <form action="#" method="post">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName" class="form-label">First Name*</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName" class="form-label">Last Name*</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name" required>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email*</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
             </div>
             <div class="mb-3">
                 <label for="phoneNumber" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" id="phoneNumber" placeholder="Enter your phone number">
+                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password*</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
             </div>
             <div class="mb-3">
                 <label for="confirmPassword" class="form-label">Confirm Password*</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <textarea class="form-control" id="address" rows="3" placeholder="Enter your address"></textarea>
+                <textarea class="form-control" id="address" rows="3" name="address" placeholder="Enter your address"></textarea>
             </div>
             <button type="submit" class="btn btn-primary dark-blue-bg float-end">Save</button>
         </form>

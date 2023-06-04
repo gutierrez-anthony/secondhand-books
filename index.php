@@ -15,12 +15,14 @@ error_reporting(E_ALL);
 // Require the autoload file
 require_once('vendor/autoload.php');
 require_once('model/data-layer.php');
+//require_once($_SERVER['DOCUMENT_ROOT'].'/../pdo.php');
 
 // Create an instance for f3 object
 $f3 = Base::instance();
 
 // Define a default route for home
 $f3->route('GET /', function($f3) {
+
 
     // Set the title of the page
     $f3->set('title', "Home");

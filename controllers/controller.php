@@ -35,27 +35,23 @@ class Controller
             $message = (isset($_POST['message'])) ? $_POST['message'] : '';
 
             // *** If name is not valid, set an error variable
-            if (Validation::validName($name)) {
-            } else {
+            if (!Validation::validName($name)) {
                 $this->_f3->set('errors["name"]', 'Invalid name entered');
             }
 
             // *** If subject is not valid, set an error variable
-            if (Validation::validateEmailSubject($subject)) {
-            } else {
-                $this->_f3->set('errors["name"]', 'Invalid name entered');
+            if (!Validation::validateEmailSubject($subject)) {
+                $this->_f3->set('errors["subject"]', 'Invalid subject entered');
             }
 
             // *** If email is not valid, set an error variable
-            if (Validation::validEmail($email)) {
-            } else {
-                $this->_f3->set('errors["name"]', 'Invalid name entered');
+            if (!Validation::validEmail($email)) {
+                $this->_f3->set('errors["email"]', 'Invalid email entered');
             }
 
             // *** If message is not valid, set an error variable
-            if (Validation::validateMessage($message)) {
-            } else {
-                $this->_f3->set('errors["name"]', 'Invalid name entered');
+            if (!Validation::validateMessage($message)) {
+                $this->_f3->set('errors["message"]', 'Invalid message entered');
             }
 
             // Redirect to home route if there

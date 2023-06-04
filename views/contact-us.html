@@ -16,18 +16,38 @@ Date: 5/25/2023
       <div class="mb-3">
         <label for="name" class="form-label">Name*</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['name']) }}">
+          <span class="err">{{ @errors['name'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email*</label>
         <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['email']) }}">
+          <span class="err">{{ @errors['email'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="subject" class="form-label">Subject*</label>
         <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter the subject" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['subject']) }}">
+          <span class="err">{{ @errors['subject'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="message" class="form-label">Message*</label>
         <textarea class="form-control" id="message" rows="5" name="message" placeholder="Enter your message" required></textarea>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['message']) }}">
+          <span class="err">{{ @errors['message'] }}</span>
+        </check>
       </div>
       <button type="submit" class="btn btn-primary dark-blue-bg float-end">Send</button>
     </form>

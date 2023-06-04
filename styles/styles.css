@@ -67,6 +67,10 @@ a img {
     border-color: #03045e !important;
 }
 
+.err{
+    color: darkred;
+}
+
 /**
 The styling for alert.
  */

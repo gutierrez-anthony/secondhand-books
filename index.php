@@ -14,11 +14,13 @@ error_reporting(E_ALL);
 
 // Require the autoload file
 require_once('vendor/autoload.php');
-require_once('model/data-layer.php');
+
 //require_once($_SERVER['DOCUMENT_ROOT'].'/../pdo.php');
 
 // Create an instance for f3 object
 $f3 = Base::instance();
+$con = new Controller($f3);
+$f3->OUR_EMAIL = 'jokar.mehdi@student.greenriver.edu';
 
 // Define a default route for home
 $f3->route('GET /', function($f3) {
@@ -26,9 +28,12 @@ $f3->route('GET /', function($f3) {
 
     // Set the title of the page
     $f3->set('title', "Home");
+    //$alert = 'This alert will be used for showing a successful operation!';
+    $f3->set('alert', $f3->get('SESSION.alert'));
+    $f3->set('SESSION.alert', '');
 
     // Get the data from the model and add to a new card
-    $f3->set('books', getBooks());
+    $f3->set('books', DataLayer::getBooks());
 
     // Define a view page
     $view = new Template();
@@ -39,7 +44,7 @@ $f3->route('GET /', function($f3) {
 $f3->route('GET /home', function($f3) {
 
     // Get the data from the model and add to a new card
-    $f3->set('books', getBooks());
+    $f3->set('books', DataLayer::getBooks());
 
     //Redirect to the default route
     $f3->reroute('/');
@@ -97,15 +102,8 @@ $f3->route('GET /faq', function($f3) {
 
 
 // Define a contact-us route
-$f3->route('GET|POST /contact-us', function($f3) {
-
-    // Set the title of the page
-    $f3->set('title', "Contact Us");
-
-
-    // Define a view page
-    $view = new Template();
-    echo $view->render('views/contact-us.html');
+$f3->route('GET|POST /contact-us', function() {
+    $GLOBALS['con']->contactUS();
 });
 
 

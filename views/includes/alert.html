@@ -1,0 +1,11 @@
+<check if="{{ isset(@alert)  && @alert!='' }}">
+    <true>
+        <div class="d-flex justify-content-center m-3">
+            <div id="myAlert" class="alert w-50">
+                <span class="closebtn" onclick="closeAlert()">&times;</span>
+                {{ @alert }}
+            </div>
+        </div>
+    </true>
+</check>
+

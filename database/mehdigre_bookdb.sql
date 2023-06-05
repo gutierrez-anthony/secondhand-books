@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 03, 2023 at 10:24 PM
+-- Generation Time: Jun 04, 2023 at 11:12 PM
 -- Server version: 10.2.44-MariaDB
 -- PHP Version: 8.1.16
 
@@ -35,11 +35,11 @@ CREATE TABLE `Book` (
   `authors` varchar(200) NOT NULL,
   `description` text DEFAULT NULL,
   `subject` varchar(100) DEFAULT NULL,
-  `department` varchar(100) DEFAULT NULL,
-  `course` varchar(100) DEFAULT NULL,
   `photoPath` varchar(200) DEFAULT NULL,
+  `photo_name` varchar(200) DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
-  `isApproved` tinyint(1) NOT NULL DEFAULT 0
+  `isApproved` tinyint(1) NOT NULL DEFAULT 0,
+  `post_time` time NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -58,7 +58,8 @@ CREATE TABLE `Person` (
   `email` varchar(100) NOT NULL,
   `is_admin` tinyint(1) NOT NULL DEFAULT 0,
   `password` varchar(255) NOT NULL,
-  `uuid` varchar(50) DEFAULT NULL
+  `uuid` varchar(50) DEFAULT NULL,
+  `password_timestamp` time DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --

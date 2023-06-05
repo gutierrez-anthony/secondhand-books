@@ -15,7 +15,7 @@ error_reporting(E_ALL);
 // Require the autoload file
 require_once('vendor/autoload.php');
 
-//require_once($_SERVER['DOCUMENT_ROOT'].'/../pdo.php');
+$dataLayer = new DataLayer();
 
 // Create an instance for f3 object
 $f3 = Base::instance();

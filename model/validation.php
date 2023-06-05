@@ -5,7 +5,7 @@
  * @auther Mehdi Jokar
  *
  * Created 6/3/2023
- * 328/secondhand-books/model/validation.php.php
+ * 328/secondhand-books/model/validation.php
  * Validation Class for Sleeping Donuts project
  */
 

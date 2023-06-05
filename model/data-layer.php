@@ -9,8 +9,33 @@
  * The DataLayer class for Sleeping Donuts project
  */
 
+
+require_once($_SERVER['DOCUMENT_ROOT'].'/../pdo.php');
 class DataLayer
 {
+
+    /**
+     * @var PDO The database connection object
+     */
+    private $_dbh;
+
+    /**
+     * DataLayer Constructor
+     */
+    function __construct()
+    {
+        try{
+            //Instantiate a database object
+            $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            //echo "Connected to database!";
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+
+        }
+    }
+
+
     static function getBooks()
     {
         $books = array("book one", "book two", "book three", "book four");

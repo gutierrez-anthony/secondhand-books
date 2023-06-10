@@ -139,6 +139,44 @@ class DataLayer
         return true;
     }
 
+
+    /**
+     * This function returns a user or an admin
+     * based on person's is_admin column by email
+     * @param $email
+     * @return Admin|User
+     */
+    function getPersonByEmail($email)
+    {
+        // 1. define the query
+        $sql = "SELECT *
+                FROM Person 
+                WHERE email = :email";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. bind the parameters
+        $statement->bindParam(':email', $email);
+
+        //4. Execute
+        $statement->execute();
+
+        // 5. Process the result
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        if($row['is_admin'] == 0){
+            $person = new User($row['first_name'], $row['last_name'],
+                $row['email'], $row['password'], $row['phone'], $row['address']);
+
+        } else {
+            $person = new Admin($row['first_name'], $row['last_name'],
+                $row['email'], $row['password'], $row['phone'], $row['address']);
+
+        }
+        $person->setPersonId($row['person_id']);
+        return $person;
+    }
+
     static function getBooks()
     {
         $books = array("book one", "book two", "book three", "book four");

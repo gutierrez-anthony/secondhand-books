@@ -50,6 +50,14 @@ class Person
         return $this->_person_id;
     }
 
+    /**
+     * @param String $person_id
+     */
+    public function setPersonId($person_id)
+    {
+        $this->_person_id = $person_id;
+    }
+
 
 
     /**

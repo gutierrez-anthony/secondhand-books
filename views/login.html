@@ -14,12 +14,22 @@ Date: 5/25/2023
     <br>
     <form action="#" method="post">
       <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['email']) }}">
+          <span class="err">{{ @errors['email'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['password']) }}">
+          <span class="err">{{ @errors['password'] }}</span>
+        </check>
       </div>
       <button type="submit" class="btn btn-primary dark-blue-bg">Login</button>
       <a href="register" class="btn btn-primary dark-blue-bg">Sign Up</a>

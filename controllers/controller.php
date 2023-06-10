@@ -154,4 +154,47 @@ class Controller
         echo $view->render('views/register.html');
     }
 
+    function login()
+    {
+
+        //If the form has been posted
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            // Get data
+            $email = (isset($_POST['email'])) ? $_POST['email'] : '';
+            $raw_password = (isset($_POST['password'])) ? $_POST['password'] : '';
+            $email = trim($email);
+
+
+            // *** If email is not valid, set an error variable
+            if (!Validation::validEmail($email)) {
+                $this->_f3->set('errors["email"]', 'Invalid email entered');
+            }
+
+
+            // Redirect to home route if there
+            // are no errors (errors array is empty)
+            if (empty($this->_f3->get('errors'))) {
+                $person = $GLOBALS['dataLayer']->getPersonByEmail($email);
+                $hashed_password = $person->getPassword();
+
+                // Verify password
+                if(!password_verify($raw_password, $hashed_password)){
+                    $this->_f3->set('errors["password"]', 'Wrong password entered');
+                } else{
+                    $this->_f3->set('SESSION.person', $person);
+                    $this->_f3->reroute('/');
+                }
+            }
+        }
+
+        // Set the title of the page
+        $this->_f3->set('title', "LogIn");
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/login.html');
+    }
+
 }

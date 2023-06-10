@@ -22,6 +22,10 @@ $f3 = Base::instance();
 $con = new Controller($f3);
 $f3->OUR_EMAIL = 'jokar.mehdi@student.greenriver.edu';
 
+/*$f3->set('SESSION.userId', 4);
+$f3->set('SESSION.name', 'Mehdi');*/
+
+
 // Define a default route for home
 $f3->route('GET /', function($f3) {
 
@@ -120,15 +124,8 @@ $f3->route('GET|POST /contact-owner', function($f3) {
 });
 
 // Define a login route
-$f3->route('GET|POST /login', function($f3) {
-
-    // Set the title of the page
-    $f3->set('title', "LogIn");
-
-
-    // Define a view page
-    $view = new Template();
-    echo $view->render('views/login.html');
+$f3->route('GET|POST /login', function() {
+    $GLOBALS['con']->login();
 });
 
 // Define a register route
@@ -190,7 +187,7 @@ $f3->route('GET|POST /admin-dashboard', function($f3) {
 $f3->route('GET|POST /lists', function($f3) {
 
     // Get the data from the model and add to a new card
-    $f3->set('books', getBooks());
+    $f3->set('books', DataLayer::getBooks());
 
     // Set the title of the page
     $f3->set('title', "Lists");
@@ -215,6 +212,19 @@ $f3->route('GET /confirm-email/@uuid', function($f3, $params) {
     }
     $f3->reroute('/');
 });
+
+
+// Define a logout route
+$f3->route('GET /logout', function($f3) {
+    session_start();
+
+
+    // Destroys session array
+    session_destroy();
+
+    $f3->reroute('/');
+});
+
 
 // Run Fat-Free
 $f3 -> run();

@@ -132,15 +132,8 @@ $f3->route('GET|POST /login', function($f3) {
 });
 
 // Define a register route
-$f3->route('GET|POST /register', function($f3) {
-
-    // Set the title of the page
-    $f3->set('title', "Register");
-
-
-    // Define a view page
-    $view = new Template();
-    echo $view->render('views/register.html');
+$f3->route('GET|POST /register', function() {
+    $GLOBALS['con']->register();
 });
 
 // Define a profile route
@@ -206,6 +199,21 @@ $f3->route('GET|POST /lists', function($f3) {
     // Define a view page
     $view = new Template();
     echo $view->render('views/lists.html');
+});
+
+
+
+// Define a confirm-email route
+$f3->route('GET /confirm-email/@uuid', function($f3, $params) {
+
+    $uuid = $params['uuid'];
+    $result = $GLOBALS['dataLayer']->confirmEmail($uuid);
+
+
+    if($result){
+        $f3->set('SESSION.alert', 'Your email address is confirmed.');
+    }
+    $f3->reroute('/');
 });
 
 // Run Fat-Free

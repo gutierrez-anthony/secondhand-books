@@ -19,6 +19,7 @@ class Person
     private $_phone;
     private $_password;
     private $_is_admin;
+    private $_is_active;
     private $_uuid;
     private $_password_timestamp;
 
@@ -31,7 +32,7 @@ class Person
      * @param $phone String phone number
      * @param $password String password
      */
-    public function __construct($fname, $lname, $email, $password, $address = '', $phone = '')
+    public function __construct($fname, $lname, $email, $password, $phone = '', $address = '')
     {
         $this->_fname = $fname;
         $this->_lname = $lname;
@@ -156,11 +157,27 @@ class Person
     }
 
     /**
+     * @return Boolean
+     */
+    public function getIsActive()
+    {
+        return $this->_is_active;
+    }
+
+    /**
      * @param Boolean $isadmin
      */
     public function setIsAdmin($isadmin)
     {
         $this->_is_admin = $isadmin;
+    }
+
+    /**
+     * @param Boolean $isadmin
+     */
+    public function setIsActive($isctive)
+    {
+        $this->_is_active = $isctive;
     }
 
     /**

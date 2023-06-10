@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 04, 2023 at 11:12 PM
+-- Generation Time: Jun 10, 2023 at 02:00 AM
 -- Server version: 10.2.44-MariaDB
 -- PHP Version: 8.1.16
 
@@ -59,8 +59,16 @@ CREATE TABLE `Person` (
   `is_admin` tinyint(1) NOT NULL DEFAULT 0,
   `password` varchar(255) NOT NULL,
   `uuid` varchar(50) DEFAULT NULL,
-  `password_timestamp` time DEFAULT NULL
+  `password_timestamp` time DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Person`
+--
+
+INSERT INTO `Person` (`person_id`, `first_name`, `last_name`, `phone`, `address`, `email`, `is_admin`, `password`, `uuid`, `password_timestamp`, `is_active`) VALUES
+(6, 'Mehdi', 'Jokar', '2065656710', '608 39Th Ave SW, Apt D20', 'jokar.mehdi2@gmail.com', 0, '$2y$10$rX1A1kT3ipm744HuqPiDDu5G78gRFSNrAO8mCDRUcSIIbO.OpNtS6', 'cf9f4b66-0753-11ee-90fe-f23c91a78bbf', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -93,7 +101,7 @@ ALTER TABLE `Book`
 -- AUTO_INCREMENT for table `Person`
 --
 ALTER TABLE `Person`
-  MODIFY `person_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `person_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

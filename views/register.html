@@ -17,27 +17,57 @@ Date: 5/25/2023
         <div class="col-md-6 mb-3">
           <label for="firstName" class="form-label">First Name*</label>
           <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" required>
+
+          <!-- Display an error if there is one -->
+          <check if="{{ isset(@errors['fname']) }}">
+            <span class="err">{{ @errors['fname'] }}</span>
+          </check>
         </div>
         <div class="col-md-6 mb-3">
           <label for="lastName" class="form-label">Last Name*</label>
           <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name" required>
+
+          <!-- Display an error if there is one -->
+          <check if="{{ isset(@errors['lname']) }}">
+            <span class="err">{{ @errors['lname'] }}</span>
+          </check>
         </div>
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email*</label>
         <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['email']) }}">
+          <span class="err">{{ @errors['email'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="phoneNumber" class="form-label">Phone Number</label>
         <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number">
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['phone']) }}">
+          <span class="err">{{ @errors['phone'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password*</label>
         <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['password']) }}">
+          <span class="err">{{ @errors['password'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="confirmPassword" class="form-label">Confirm Password*</label>
         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['confirm_password']) }}">
+          <span class="err">{{ @errors['confirm_password'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="address" class="form-label">Address</label>

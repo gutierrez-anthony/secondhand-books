@@ -170,6 +170,20 @@ $f3->route('GET|POST /add-book', function() {
 // Define a search-results route
 $f3->route('GET|POST /search-results', function($f3) {
 
+    //If the form has been posted
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+        // Get the data
+        $search = (isset($_POST['search'])) ? $_POST['search'] : '';
+
+
+        $f3->set('SESSION.search', $search);
+        $books = $GLOBALS['dataLayer']->search($f3->get('SESSION.search'));
+
+        $f3->set('SESSION.books', $books);
+
+    }
+
     // Set the title of the page
     $f3->set('title', "Search Results");
 

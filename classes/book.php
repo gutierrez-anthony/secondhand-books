@@ -15,6 +15,14 @@ class Book
     private $_book_id;
     private $_title;
     private $_owner;
+
+    /**
+     * @param mixed $book_id
+     */
+    public function setBookId($book_id)
+    {
+        $this->_book_id = $book_id;
+    }
     private $_authors;
     private $_description;
     private $_subject;

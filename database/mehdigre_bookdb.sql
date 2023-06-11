@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 10, 2023 at 02:00 AM
+-- Generation Time: Jun 11, 2023 at 12:17 AM
 -- Server version: 10.2.44-MariaDB
 -- PHP Version: 8.1.16
 
@@ -33,6 +33,7 @@ CREATE TABLE `Book` (
   `title` varchar(100) NOT NULL,
   `owner` int(11) NOT NULL,
   `authors` varchar(200) NOT NULL,
+  `edition` varchar(100) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `subject` varchar(100) DEFAULT NULL,
   `photoPath` varchar(200) DEFAULT NULL,
@@ -41,6 +42,17 @@ CREATE TABLE `Book` (
   `isApproved` tinyint(1) NOT NULL DEFAULT 0,
   `post_time` time NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Book`
+--
+
+INSERT INTO `Book` (`book_id`, `title`, `owner`, `authors`, `edition`, `description`, `subject`, `photoPath`, `photo_name`, `price`, `isApproved`, `post_time`) VALUES
+(2, 'Labore qui assumenda', 6, 'Eligendi cum mollit ', NULL, 'Aliquam quos velit s', 'Alias vel iure sunt ', 'uploads/648525203221961mIq2iJUXL.jpg', '648525203221961mIq2iJUXL.jpg', 585.00, 0, '21:36:32'),
+(3, 'Cupidatat illo labor', 6, 'Mollitia facere fugi', NULL, 'Quibusdam laboriosam', 'Vero rerum officia o', 'uploads/64852530863f181Gt2O4FvTL.jpg', '64852530863f181Gt2O4FvTL.jpg', 679.00, 0, '21:36:48'),
+(4, 'Et mollit aut minim ', 6, 'Dolore alias aliquip', NULL, 'Rerum error omnis se', 'Quam quasi iure cons', 'uploads/648525472358b91Ss-Th23nL.jpg', '648525472358b91Ss-Th23nL.jpg', 995.00, 0, '21:37:11'),
+(5, 'In voluptates illo v', 6, 'In dolores et nulla ', NULL, 'Ut corporis fugiat a', 'Maxime ipsa volupta', 'uploads/64852556d8cce71oZ45OrLjL.jpg', '64852556d8cce71oZ45OrLjL.jpg', 460.00, 0, '21:37:26'),
+(6, 'Quo duis ex accusant', 6, 'Do repudiandae deser', '', 'Vel eiusmod velit q', 'Itaque quia laboris ', 'uploads/64852fda939a8Reducing flamma 0.png', '64852fda939a8Reducing flamma 0.png', 100.00, 0, '22:22:18');
 
 -- --------------------------------------------------------
 
@@ -68,7 +80,7 @@ CREATE TABLE `Person` (
 --
 
 INSERT INTO `Person` (`person_id`, `first_name`, `last_name`, `phone`, `address`, `email`, `is_admin`, `password`, `uuid`, `password_timestamp`, `is_active`) VALUES
-(6, 'Mehdi', 'Jokar', '2065656710', '608 39Th Ave SW, Apt D20', 'jokar.mehdi2@gmail.com', 0, '$2y$10$rX1A1kT3ipm744HuqPiDDu5G78gRFSNrAO8mCDRUcSIIbO.OpNtS6', 'cf9f4b66-0753-11ee-90fe-f23c91a78bbf', NULL, 1);
+(6, 'Mehdi', 'Jokar', '2065656710', '608 39Th Ave SW, Apt D20', 'jokar.mehdi2@gmail.com', 1, '$2y$10$rX1A1kT3ipm744HuqPiDDu5G78gRFSNrAO8mCDRUcSIIbO.OpNtS6', 'cf9f4b66-0753-11ee-90fe-f23c91a78bbf', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -95,7 +107,7 @@ ALTER TABLE `Person`
 -- AUTO_INCREMENT for table `Book`
 --
 ALTER TABLE `Book`
-  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `Person`

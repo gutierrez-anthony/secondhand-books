@@ -255,6 +255,44 @@ class DataLayer
         $book->setIsApproved($row['isApproved']);
         return $book;
     }
+
+    function search($search_phrase){
+
+        // SELECT Statement - multiple rows
+        // 1. define the query
+        $sql = "SELECT * FROM Book
+                    WHERE isApproved = 1
+                        AND (title LIKE :keyword
+                        OR authors LIKE :keyword
+                        OR subject LIKE :keyword
+                        OR description LIKE :keyword)";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. bind the parameters (none here)
+        $str = '%' . $search_phrase . '%';
+        $statement->bindParam(':keyword', $str);
+
+
+        //4. Execute
+        $statement->execute();
+
+        // 5. Process the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $books = array();
+
+        foreach ($result as $row){
+            $book = new Book($row['title'], $row['owner'], $row['authors'],
+                $row['price'], $row['photoPath'], $row['photo_name'], $row['description'], $row['subject'], $row['edition']);
+            $book->setBookId($row['book_id']);
+            $books[] = $book;
+        }
+
+        return $books;
+
+    }
     static function getBooks()
     {
         $books = array("book one", "book two", "book three", "book four");

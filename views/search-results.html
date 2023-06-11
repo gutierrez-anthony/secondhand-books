@@ -9,7 +9,11 @@ Date: 5/26/2023
 
 <main class="container-fluid mb-5">
   <div class="container w-75">
-    <h3>Search results: [SEARCHED PHRASE]</h3>
+    <check if="{{ isset(@SESSION.search) }}">
+      <true>
+        <h3>Search results for {{ @SESSION.search }}</h3>
+      </true>
+    </check>
     <br>
     <br>
     <div class="row mb-2">
@@ -25,68 +29,37 @@ Date: 5/26/2023
 
 
 
-<!--Result 1-->
-      <div class="card w-100 mt-3">
-        <div class="card-header">
-          Title
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-9">
-            <p class="card-text">Authors</p>
-            <p class="card-text">Edition</p>
-            <p class="card-text">Edition</p>
-            <a href="#" class="btn btn-primary dark-blue-bg">More Details</a>
-            </div>
-            <div class="col-3">
-              <img src="images/default_book.jpg" class="img-fluid" alt="Sample Image">
+    <check if="{{ isset(@SESSION.books) }}">
+      <repeat group="{{ @SESSION.books }}" value="{{ @book }}">
+        <div class="card w-100 mt-3">
+          <div class="card-header">
+            <b>Title:</b> {{ @book->getTitle() }}
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-9">
+                <p class="card-text"><b>Authors:</b> {{ @book->getAuthors() }}</p>
+                <p class="card-text"><b>Edition:</b> {{ @book->getEdition() }}</p>
+                <p class="card-text"><b>Price:</b> {{ @book->getPrice() }}</p>
+                <a href="book?id={{ @book->getBookId() }}" class="btn btn-primary dark-blue-bg">More Details</a>
+              </div>
+              <div class="col-3">
+                <img src="{{ @book->getPhotoPath() }}" class="img-fluid" alt="{{ @SESSION.book->getPhotoName() }}">
+              </div>
             </div>
           </div>
         </div>
-     </div>
+      </repeat>
+    </check>
 
 
-    <!--Result 2-->
-    <div class="card w-100 mt-3">
-      <div class="card-header">
-        Title
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-9">
-            <p class="card-text">Authors</p>
-            <p class="card-text">Edition</p>
-            <p class="card-text">Edition</p>
-            <a href="#" class="btn btn-primary dark-blue-bg">More Details</a>
-          </div>
-          <div class="col-3">
-            <img src="images/default_book.jpg" class="img-fluid" alt="Sample Image">
-          </div>
-        </div>
-      </div>
+
+
     </div>
 
 
 
-    <!--Result 3-->
-    <div class="card w-100 mt-3">
-      <div class="card-header">
-        Title
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-9">
-            <p class="card-text">Authors</p>
-            <p class="card-text">Edition</p>
-            <p class="card-text">Edition</p>
-            <a href="#" class="btn btn-primary dark-blue-bg">More Details</a>
-          </div>
-          <div class="col-3">
-            <img src="images/default_book.jpg" class="img-fluid" alt="Sample Image">
-          </div>
-        </div>
-      </div>
-    </div>
+
 
   </div>
   <br>

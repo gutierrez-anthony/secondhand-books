@@ -197,4 +197,114 @@ class Controller
         echo $view->render('views/login.html');
     }
 
+    function addBook()
+    {
+        if (!Validation::loggedIn($this->_f3)) {
+            $this->_f3->reroute('/login');
+        }
+
+
+        //If the form has been posted
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            // Get the data
+            $title = (isset($_POST['title'])) ? $_POST['title'] : '';
+            $authors = (isset($_POST['authors'])) ? $_POST['authors'] : '';
+            $edition = (isset($_POST['edition'])) ? $_POST['edition'] : '';
+            $subject = (isset($_POST['subject'])) ? $_POST['subject'] : '';
+            $price = (isset($_POST['price'])) ? $_POST['price'] : '';
+            $description = (isset($_POST['description'])) ? $_POST['description'] : '';
+
+            // *** If price is not valid, set an error variable
+            if (!Validation::validatePrice($price)) {
+                $this->_f3->set('errors["price"]', 'Invalid price entered');
+            }
+
+            // *** If title is not valid, set an error variable
+            if (!Validation::validateBookField($title)) {
+                $this->_f3->set('errors["title"]', 'Invalid title entered');
+            }
+
+            // *** If authors is not valid, set an error variable
+            if (!Validation::validateBookField($authors)) {
+                $this->_f3->set('errors["authors"]', 'Invalid authors entered');
+            }
+
+            // *** If edition is not valid, set an error variable
+            if (!Validation::validateBookField($edition)) {
+                $this->_f3->set('errors["edition"]', 'Invalid edition entered');
+            }
+
+            // *** If subject is not valid, set an error variable
+            if (!Validation::validateBookField($subject)) {
+                $this->_f3->set('errors["subject"]', 'Invalid subject entered');
+            }
+
+            //=========Upload Image==================//
+            if(isset($_FILES['image']) && $_FILES['image']['name'] != ''){
+                $errors= array();
+                $file_name = $_FILES['image']['name'];
+                $file_name = uniqid() . $file_name;
+                $target_dir = "uploads/";
+                $target_file = $target_dir . $file_name;
+                $file_size =$_FILES['image']['size'];
+                $file_tmp =$_FILES['image']['tmp_name'];
+                $file_ext= strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+                $extensions= array("jpeg","jpg","png");
+
+                if(in_array($file_ext,$extensions)=== false){
+                    $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+                }
+
+                // Check if file already exists
+                if (file_exists($target_file)) {
+                    $errors[]='File already exists.';
+                }
+
+                if($file_size > 2097152){
+                    $errors[]='File size must be excately 2 MB';
+                }
+
+                if(empty($errors)==true){
+                    move_uploaded_file($file_tmp, $target_file);
+                }else{
+                    $this->_f3->set('errors["image"]', $errors);
+                }
+            } else {
+                $file_name = 'default_book.jpg';
+                $target_file = 'images/default_book.jpg';
+            }
+            //================End of image upload================
+
+
+
+            // Redirect to home route if there
+            // are no errors (errors array is empty)
+            if (empty($this->_f3->get('errors'))) {
+                $owner = $this->_f3->get('SESSION.person')->getPersonId();
+                $book = new Book($title, $owner, $authors, $price, $target_file, $file_name, $description, $subject);
+                $this->_f3->set('SESSION.book', $book);
+                $book_id = $GLOBALS['dataLayer']->insertBook($this->_f3->get('SESSION.book'));
+                if(!empty($book_id)){
+                    $this->_f3->set('SESSION.alert', 'Your book will be online after approval.');
+                }
+
+                $this->_f3->reroute('/');
+            }
+
+
+        }
+
+
+
+        // Set the title of the page
+        $this->_f3->set('title', "Add Book");
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/add-book.html');
+    }
+
 }

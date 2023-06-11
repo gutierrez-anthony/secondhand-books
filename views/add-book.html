@@ -16,114 +16,64 @@ Date: 5/26/2023
       <div class="mb-3">
         <label for="image" class="form-label">Upload Image</label>
         <input type="file" class="form-control" id="image" name="image">
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['image']) }}">
+          <repeat group="{{ @errors['image'] }}" value="{{ @error }}">
+            <span class="small-font err">{{ @error }}</span><br>
+          </repeat>
+        </check>
       </div>
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" name="title">
+        <input type="text" class="form-control" id="title" name="title" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['title']) }}">
+          <span class="err">{{ @errors['title'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="authors" class="form-label">Authors</label>
-        <input type="text" class="form-control" id="authors" name="authors">
+        <input type="text" class="form-control" id="authors" name="authors" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['authors']) }}">
+          <span class="err">{{ @errors['authors'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="edition" class="form-label">Edition</label>
-        <input type="text" class="form-control" id="edition" name="edition">
-      </div>
-      <div class="mb-3">
-        <label for="department" class="form-label">Department</label>
-        <select class="form-select" id="department" name="department">
-          <option value="acct">ACCT</option>
-          <option value="acct-amp">ACCT&amp;</option>
-          <option value="ames">AMES</option>
-          <option value="anth-amp">ANTH&amp;</option>
-          <option value="ap">AP</option>
-          <option value="arab">ARAB</option>
-          <option value="art">ART</option>
-          <option value="art-amp">ART&amp;</option>
-          <option value="astr-amp">ASTR&amp;</option>
-          <option value="atech">ATECH</option>
-          <option value="avia">AVIA</option>
-          <option value="biol">BIOL</option>
-          <option value="biol-amp">BIOL&amp;</option>
-          <option value="bnurs">BNURS</option>
-          <option value="btac">BTAC</option>
-          <option value="bus">BUS</option>
-          <option value="bus-amp">BUS&amp;</option>
-          <option value="cad">CAD</option>
-          <option value="chem-amp">CHEM&amp;</option>
-          <option value="cj">CJ</option>
-          <option value="cj-amp">CJ&amp;</option>
-          <option value="cmst">CMST</option>
-          <option value="cmst-amp">CMST&amp;</option>
-          <option value="crc">CRC</option>
-          <option value="cs">CS</option>
-          <option value="dance">DANCE</option>
-          <option value="drma">DRMA</option>
-          <option value="drma-amp">DRMA&amp;</option>
-          <option value="eced-amp">ECED&amp;</option>
-          <option value="econ">ECON</option>
-          <option value="econ-amp">ECON&amp;</option>
-          <option value="educ">EDUC</option>
-          <option value="educ-amp">EDUC&amp;</option>
-          <option value="engl">ENGL</option>
-          <option value="engl-amp">ENGL&amp;</option>
-          <option value="engr">ENGR</option>
-          <option value="envs">ENV S</option>
-          <option value="film">FILM</option>
-          <option value="frch-amp">FRCH&amp;</option>
-          <option value="geog">GEOG</option>
-          <option value="geog-amp">GEOG&amp;</option>
-          <option value="geol">GEOL</option>
-          <option value="germ-amp">GERM&amp;</option>
-          <option value="health">HEALTH</option>
-          <option value="hist-amp">HIST&amp;</option>
-          <option value="hsc">HSC</option>
-          <option value="human">HUMAN</option>
-          <option value="iep">IEP</option>
-          <option value="it">IT</option>
-          <option value="japn-amp">JAPN&amp;</option>
-          <option value="journ">JOURN</option>
-          <option value="math">MATH</option>
-          <option value="math-amp">MATH&amp;</option>
-          <option value="mathm">MATHM</option>
-          <option value="mfg">MFG</option>
-          <option value="mgmt">MGMT</option>
-          <option value="musc">MUSC</option>
-          <option value="nrsa">NRS A</option>
-          <option value="nutr-amp">NUTR&amp;</option>
-          <option value="pe">P E</option>
-          <option value="phil">PHIL</option>
-          <option value="phil-amp">PHIL&amp;</option>
-          <option value="phleb">PHLEB</option>
-          <option value="photo">PHOTO</option>
-          <option value="phys-amp">PHYS&amp;</option>
-          <option value="pols">POLS</option>
-          <option value="pols-amp">POLS&amp;</option>
-          <option value="psyc-amp">PSYC&amp;</option>
-          <option value="read">READ</option>
-          <option value="sdev">SDEV</option>
-          <option value="soc">SOC</option>
-          <option value="soc-amp">SOC&amp;</option>
-          <option value="span-amp">SPAN&amp;</option>
-          <option value="st sk">ST SK</option>
-          <option value="ts">TS</option>
-          <option value="weld">WELD</option>
-          <option value="wst">WST</option>
-          <option value="wwt">WWT</option>
+        <input type="text" class="form-control" id="edition" name="edition" required>
 
-        </select>
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['edition']) }}">
+          <span class="err">{{ @errors['edition'] }}</span>
+        </check>
       </div>
+
       <div class="mb-3">
-        <label for="course" class="form-label">Course/Subject</label>
-        <input type="text" class="form-control" id="course" name="course">
+        <label for="subject" class="form-label">Subject</label>
+        <input type="text" class="form-control" id="subject" name="subject" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['subject']) }}">
+          <span class="err">{{ @errors['subject'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">Price</label>
-        <input type="number" class="form-control" id="price" name="price">
+        <input type="number" step="0.01" min="0" placeholder="Enter price" class="form-control" id="price" name="price" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['price']) }}">
+          <span class="err">{{ @errors['price'] }}</span>
+        </check>
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
         <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+
       </div>
       <br>
       <div class="text-center">

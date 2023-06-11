@@ -177,6 +177,52 @@ class DataLayer
         return $person;
     }
 
+    /**
+     * insertBook insert a new book object
+     * for the secondhand-books app
+     * @param Book An Book object
+     * @return book_id of the new book object
+     */
+    function insertBook($book)
+    {
+        //PDO - Using Prepared Statements
+        //1. Define the query (test first!)
+        $sql = "INSERT INTO Book (title, owner , authors, description, subject, photoPath, photo_name, price)
+            VALUES (:title, :owner , :authors, :description, :subject, :photoPath, :photo_name, :price)";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $title = $book->getTitle();
+        $owner = $book->getOwner();
+        $authors = $book->getAuthors();
+        $description = $book->getDescription();
+        $subject = $book->getSubject();
+        $photo_path = $book->getPhotoPath();
+        $photo_name = $book->getPhotoName();
+        $price = $book->getPrice();
+
+
+        $statement->bindParam(':title', $title);
+        $statement->bindParam(':owner', $owner);
+        $statement->bindParam(':authors', $authors);
+        $statement->bindParam(':description', $description);
+        $statement->bindParam(':subject', $subject);
+        $statement->bindParam(':photoPath', $photo_path);
+        $statement->bindParam(':photo_name', $photo_name);
+        $statement->bindParam(':price', $price);
+
+
+
+        //4. Execute
+        $statement->execute();
+
+        //5. Process the result, if there is one
+        $id = $this->_dbh->lastInsertId();
+        return $id;
+    }
+
     static function getBooks()
     {
         $books = array("book one", "book two", "book three", "book four");

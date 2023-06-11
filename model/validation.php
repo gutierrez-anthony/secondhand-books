@@ -132,4 +132,66 @@ class Validation
         return true;
     }
 
+    /**
+     * Check that requester has been authenticated.
+     */
+    static function loggedIn($f3)
+    {
+        return !empty($f3->get('SESSION.person'));
+    }
+
+    /**
+     * Check that price is valid
+     */
+    static function validatePrice($price) {
+        // Remove any non-numeric characters except decimal point
+        $cleanedPrice = preg_replace('/[^0-9.]/', '', $price);
+
+        // Check if the cleaned price is a valid number
+        if (!is_numeric($cleanedPrice)) {
+            return false;
+        }
+
+        // Check if the price is non-negative
+        if ($cleanedPrice < 0) {
+            return false;
+        }
+
+        // Check if the price has a maximum of 2 decimal places
+        if (strpos($cleanedPrice, '.') !== false) {
+            $decimalPlaces = strlen(substr($cleanedPrice, strpos($cleanedPrice, '.') + 1));
+            if ($decimalPlaces > 2) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Check the add book fields not being
+     * empty ro less than five character
+     */
+    static function validateBookField($fieldValue) {
+        // Remove leading and trailing white spaces
+        $trimmedValue = trim($fieldValue);
+
+        // Check if the field is empty
+        if (empty($trimmedValue)) {
+            return false;
+        }
+
+        // Check if the string length is less than 5
+        if (strlen($trimmedValue) < 5) {
+            return false;
+        }
+
+
+        // Return true if the field passes all validations
+        return true;
+    }
+
+
+
 }

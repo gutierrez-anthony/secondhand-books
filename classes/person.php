@@ -43,12 +43,14 @@ class Person
     }
 
     /**
-     * @return int
+     * @return mixed
      */
     public function getPersonId()
     {
         return $this->_person_id;
     }
+
+
 
     /**
      * @param String $person_id

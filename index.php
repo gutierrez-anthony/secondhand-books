@@ -114,6 +114,11 @@ $f3->route('GET|POST /contact-us', function() {
 // Define a contact-owner route
 $f3->route('GET|POST /contact-owner', function($f3) {
 
+    if (!Validation::loggedIn($f3)) {
+        $f3->reroute('/login');
+    }
+
+
     // Set the title of the page
     $f3->set('title', "Contact Owner");
 
@@ -136,6 +141,11 @@ $f3->route('GET|POST /register', function() {
 // Define a profile route
 $f3->route('GET|POST /profile', function($f3) {
 
+    if (!Validation::loggedIn($f3)) {
+        $f3->reroute('/login');
+    }
+
+
     // Set the title of the page
     $f3->set('title', "Profile");
 
@@ -146,15 +156,8 @@ $f3->route('GET|POST /profile', function($f3) {
 });
 
 // Define an add-book route
-$f3->route('GET|POST /add-book', function($f3) {
-
-    // Set the title of the page
-    $f3->set('title', "Add Book");
-
-
-    // Define a view page
-    $view = new Template();
-    echo $view->render('views/add-book.html');
+$f3->route('GET|POST /add-book', function() {
+    $GLOBALS['con']->addBook();
 });
 
 
@@ -173,6 +176,14 @@ $f3->route('GET|POST /search-results', function($f3) {
 
 // Define a admin-dashboard route
 $f3->route('GET|POST /admin-dashboard', function($f3) {
+
+    if (!Validation::loggedIn($f3)) {
+        $f3->reroute('/login');
+    }
+
+    if ($f3->get('SESSION.person') instanceof User){
+        $f3->reroute('/');
+    }
 
     // Set the title of the page
     $f3->set('title', "Admin Dashboard");

@@ -22,9 +22,6 @@ $f3 = Base::instance();
 $con = new Controller($f3);
 $f3->OUR_EMAIL = 'jokar.mehdi@student.greenriver.edu';
 
-/*$f3->set('SESSION.userId', 4);
-$f3->set('SESSION.name', 'Mehdi');*/
-
 
 // Define a default route for home
 $f3->route('GET /', function($f3) {
@@ -69,8 +66,17 @@ $f3->route('GET /about-us', function($f3) {
 // Define a book route
 $f3->route('GET /book', function($f3) {
 
+    if(!isset($_GET['id'])){
+        //Redirect to the default route
+        $f3->reroute('/');
+    }
+
+    $book_id = $_GET['id'];
+    $book = $GLOBALS['dataLayer']->getBook($book_id);
+    $f3->set('SESSION.book', $book);
+
     // Set the title of the page
-    $f3->set('title', "Book Information");
+    $f3->set('title', $book->getTitle());
 
 
     // Define a view page

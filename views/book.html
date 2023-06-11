@@ -13,43 +13,39 @@ Date: 5/25/2023
             <div class="col-5">
                 <div class="row">
                     <div class="col">
-                        <P><b>Title:</b></P>
+                        <P><b>Title:</b> {{ @SESSION.book->getTitle() }}</P>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <P><b>Authors:</b></P>
+                        <P><b>Authors:</b> {{ @SESSION.book->getAuthors() }}</P>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <P><b>Edition:</b></P>
+                        <P><b>Edition:</b> {{ @SESSION.book->getEdition() }}</P>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <P><b>Department:</b></P>
+                        <P><b>Subject:</b> {{ @SESSION.book->getSubject() }}</P>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <P><b>Course:</b></P>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <P><b>Price:</b></P>
+                        <P><b>Price:</b> {{ @SESSION.book->getPrice() }}</P>
                     </div>
                 </div>
             </div>
             <div class="col-7">
-                <img src="images/default_book.jpg" class="float-end img-fluid" alt="default_book.jpg">
+                <img src="{{ @SESSION.book->getPhotoPath() }}" class="float-end img-fluid" alt="{{ @SESSION.book->getPhotoName() }}">
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <!--Description-->
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac tellus mi. Nulla id mi et erat pulvinar facilisis. Nullam finibus id sem sed scelerisque. Vestibulum enim lacus, bibendum non bibendum nec, dictum sed ex. Aenean interdum nibh eu odio suscipit maximus. In justo odio, porta et scelerisque ac, dictum nec eros. Quisque porttitor eget tellus ut efficitur. Donec efficitur ipsum tortor, vitae sollicitudin purus rhoncus quis. Nam sed metus at dolor blandit imperdiet sed sed risus. Morbi at ultricies lorem. Phasellus quis nunc et lectus placerat pharetra non eu ex. Aliquam erat volutpat. Vivamus orci nisl, semper in euismod eu, varius ultricies purus. Aliquam feugiat lorem et diam lobortis tempor. Cras accumsan consequat sodales. Phasellus commodo euismod ex, euismod eleifend arcu commodo et.</p>
+                <P><b>Description:</b></P>
+                <p>{{ @SESSION.book->getDescription() }}</p>
             </div>
         </div>
 

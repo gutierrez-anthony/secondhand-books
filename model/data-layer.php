@@ -187,8 +187,8 @@ class DataLayer
     {
         //PDO - Using Prepared Statements
         //1. Define the query (test first!)
-        $sql = "INSERT INTO Book (title, owner , authors, description, subject, photoPath, photo_name, price)
-            VALUES (:title, :owner , :authors, :description, :subject, :photoPath, :photo_name, :price)";
+        $sql = "INSERT INTO Book (title, owner , authors, edition, description, subject, photoPath, photo_name, price)
+            VALUES (:title, :owner , :authors, :edition, :description, :subject, :photoPath, :photo_name, :price)";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -197,6 +197,7 @@ class DataLayer
         $title = $book->getTitle();
         $owner = $book->getOwner();
         $authors = $book->getAuthors();
+        $edition = $book->getEdition();
         $description = $book->getDescription();
         $subject = $book->getSubject();
         $photo_path = $book->getPhotoPath();
@@ -207,6 +208,7 @@ class DataLayer
         $statement->bindParam(':title', $title);
         $statement->bindParam(':owner', $owner);
         $statement->bindParam(':authors', $authors);
+        $statement->bindParam(':edition', $edition);
         $statement->bindParam(':description', $description);
         $statement->bindParam(':subject', $subject);
         $statement->bindParam(':photoPath', $photo_path);
@@ -223,6 +225,36 @@ class DataLayer
         return $id;
     }
 
+
+    /**
+     * This function returns a book
+     * based on book_id
+     * @param $book_id
+     * @return Book object
+     */
+    function getBook($book_id)
+    {
+        // 1. define the query
+        $sql = "SELECT *
+                FROM Book 
+                WHERE book_id = :book_id";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. bind the parameters
+        $statement->bindParam(':book_id', $book_id);
+
+        //4. Execute
+        $statement->execute();
+
+        // 5. Process the result
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        $book = new Book($row['title'], $row['owner'], $row['authors'],
+            $row['price'], $row['photoPath'], $row['photo_name'], $row['description'], $row['subject'], $row['edition']);
+        $book->setIsApproved($row['isApproved']);
+        return $book;
+    }
     static function getBooks()
     {
         $books = array("book one", "book two", "book three", "book four");

@@ -23,6 +23,7 @@ class Book
     private $_price;
     private $_is_approved;
     private $_post_time;
+    private $_edition;
 
     /**
      * @param $title
@@ -34,7 +35,7 @@ class Book
      * @param $photo_name
      * @param $price
      */
-    public function __construct($title, $owner, $authors, $price, $photo_path = '', $photo_name = '', $description = '', $subject = '')
+    public function __construct($title, $owner, $authors, $price, $photo_path = '', $photo_name = '', $description = '', $subject = '', $edition = '')
     {
         $this->_title = $title;
         $this->_owner = $owner;
@@ -44,6 +45,23 @@ class Book
         $this->_photo_path = $photo_path;
         $this->_photo_name = $photo_name;
         $this->_price = $price;
+        $this->_edition = $edition;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEdition()
+    {
+        return $this->_edition;
+    }
+
+    /**
+     * @param mixed $edition
+     */
+    public function setEdition($edition)
+    {
+        $this->_edition = $edition;
     }
 
     /**

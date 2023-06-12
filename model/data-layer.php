@@ -270,7 +270,7 @@ class DataLayer
         // 2. prepare the statement
         $statement = $this->_dbh->prepare($sql);
 
-        //3. bind the parameters (none here)
+        //3. bind the parameters
         $str = '%' . $search_phrase . '%';
         $statement->bindParam(':keyword', $str);
 
@@ -292,6 +292,53 @@ class DataLayer
 
         return $books;
 
+    }
+
+    function getUnapprovedBooks(){
+        // SELECT Statement - multiple rows
+        // 1. define the query
+        $sql = "SELECT * FROM Book
+                    WHERE isApproved = 0";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+
+
+        //4. Execute
+        $statement->execute();
+
+        // 5. Process the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $books = array();
+
+        foreach ($result as $row){
+            $book = new Book($row['title'], $row['owner'], $row['authors'],
+                $row['price'], $row['photoPath'], $row['photo_name'], $row['description'], $row['subject'], $row['edition']);
+            $book->setBookId($row['book_id']);
+            $books[] = $book;
+        }
+
+        return $books;
+    }
+
+    function approveBook($book_id)
+    {
+
+        // 1. define the query
+        $sql = "UPDATE Book SET isApproved = 1 WHERE book_id  = :book_id";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. bind the parameters
+        $statement->bindParam(':book_id', $book_id);
+
+        //4. Execute
+        $statement->execute();
+
+        return true;
     }
     static function getBooks()
     {

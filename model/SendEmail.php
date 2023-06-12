@@ -63,7 +63,7 @@ class SendEmail
     static function sendConfirmLink($to, $from, $uuid, $f3)
     {
         $baseDomain = $f3->get('BASE');
-        $approve_link = 'https://' . $_SERVER['HTTP_HOST'] . $baseDomain . '/confirm-email/' .  $uuid;
+        $approve_link = 'https://' . $_SERVER['HTTP_HOST'] . $baseDomain . '/confirm-email?uuid=' .  $uuid;
 
 
         // Send as an email

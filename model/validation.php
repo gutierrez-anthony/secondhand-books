@@ -193,5 +193,25 @@ class Validation
     }
 
 
+    static function validBookIds($f3, $book_ids)
+    {
+        $valid_ids = array();
+        $books = $f3->get('SESSION.person')->getBooksToApprove();
+        // Looping over the $books array
+        foreach ($books as $book) {
+            $valid_ids[] = $book->getBookId();
+        }
+
+        //
+        foreach ($book_ids as $id) {
+            if (!in_array($id, $valid_ids)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
 
 }

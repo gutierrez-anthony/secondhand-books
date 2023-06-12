@@ -109,7 +109,7 @@ class Controller
 
             // *** If phone is not valid, set an error variable
             if (!Validation::validPhone($phone)) {
-                $this->_f3->set('errors["phone"]', 'Invalid message entered');
+                $this->_f3->set('errors["phone"]', 'Phone number should be 10 digits.');
             }
 
 
@@ -128,8 +128,7 @@ class Controller
             // are no errors (errors array is empty)
             if (empty($this->_f3->get('errors'))) {
                 $person = new Person($first_name, $last_name, $email, $password, $phone, $address);
-                $this->_f3->set('SESSION.person', $person);
-                $person_id = $GLOBALS['dataLayer']->insertPerson($this->_f3->get('SESSION.person'));
+                $person_id = $GLOBALS['dataLayer']->insertPerson($person);
                 $person = $GLOBALS['dataLayer']->getPerson($person_id);
                 $to = $person->getEmail();
                 $uuid = $person->getUuid();
@@ -201,6 +200,10 @@ class Controller
     {
         if (!Validation::loggedIn($this->_f3)) {
             $this->_f3->reroute('/login');
+        }
+
+        if ($this->_f3->get('SESSION.person') instanceof Admin){
+            $this->_f3->reroute('/');
         }
 
 
@@ -305,6 +308,96 @@ class Controller
         // Define a view page
         $view = new Template();
         echo $view->render('views/add-book.html');
+    }
+
+    function confirmEmail()
+    {
+        if(!isset($_GET['uuid'])){
+            //Redirect to the default route
+            $this->_f3->reroute('/');
+        }
+
+        $uuid = $_GET['uuid'];
+        $result = $GLOBALS['dataLayer']->confirmEmail($uuid);
+
+
+        if($result){
+            $this->_f3->set('SESSION.alert', 'Your email address is confirmed.');
+        }
+        $this->_f3->reroute('/');
+    }
+
+    function logout(){
+        session_start();
+
+
+        // Destroys session array
+        session_destroy();
+
+        $this->_f3->reroute('/');
+    }
+
+    function searchResults(){
+        //If the form has been posted
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            // Get the data
+            $search = (isset($_POST['search'])) ? $_POST['search'] : '';
+
+
+            $this->_f3->set('SESSION.search', $search);
+            $books = $GLOBALS['dataLayer']->search($this->_f3->get('SESSION.search'));
+
+            $this->_f3->set('SESSION.books', $books);
+
+        }
+
+        // Set the title of the page
+        $this->_f3->set('title', "Search Results");
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/search-results.html');
+    }
+
+    function faq(){
+        // Set the title of the page
+        $this->_f3->set('title', "FAQ");
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/faq.html');
+    }
+
+    function termsOfServices(){
+        // Set the title of the page
+        $this->_f3->set('title', "Terms of Services");
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/terms-of-services.html');
+    }
+
+    function book(){
+        if(!isset($_GET['id'])){
+            //Redirect to the default route
+            $this->_f3->reroute('/');
+        }
+
+        $book_id = $_GET['id'];
+        $book = $GLOBALS['dataLayer']->getBook($book_id);
+        $this->_f3->set('SESSION.book', $book);
+
+        // Set the title of the page
+        $this->_f3->set('title', $book->getTitle());
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/book.html');
     }
 
 }

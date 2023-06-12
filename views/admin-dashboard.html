@@ -13,61 +13,39 @@ Date: 5/26/2023
     <br><br>
     <h4>Newly added textbooks</h4>
 
+    <check if="{{ null !== @SESSION.person->getBooksToApprove() }}">
     <form action="#" method="post">
     <table class="table border border-secondary">
       <thead>
       <tr>
         <th>Title</th>
-        <th>Owner</th>
         <th>Approve</th>
-
       </tr>
       </thead>
       <tbody>
+
+      <repeat group="{{ @SESSION.person->getBooksToApprove() }}" value="{{ @book }}">
       <tr>
-        <td><a href="book" class="text-decoration-none text-color-dark">Book one</a></td>
-        <td>
-          <a href="profile" class="text-decoration-none text-color-dark">John Doe</a>
-        </td>
+        <td><a href="book?id={{ @book->getBookId() }}" class="text-decoration-none text-color-dark">{{ @book->getTitle() }}</a></td>
         <td>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" name="ssssssssssss" checked>
+            <input class="form-check-input" type="checkbox" value="{{ @book->getBookId() }}" name="approved[]">
           </div>
         </td>
-
       </tr>
-      <tr>
-        <td><a href="book" class="text-decoration-none text-color-dark">Book two</a></td>
-        <td>
-          <a href="profile" class="text-decoration-none text-color-dark">Allie Doe</a>
-        </td>
-        <td>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" name="ssssssssssss" checked>
-          </div>
-        </td>
+      </repeat>
 
-      </tr>
-
-      <tr>
-        <td><a href="book" class="text-decoration-none text-color-dark">Book three</a></td>
-        <td>
-          <a href="profile" class="text-decoration-none text-color-dark">Jack Smith</a>
-        </td>
-        <td>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" name="ssssssssssss">
-          </div>
-        </td>
-
-      </tr>
-      <!-- Add more rows as needed -->
       </tbody>
     </table>
+      <!-- Display an error if there is one -->
+      <check if="{{ isset(@errors['approved']) }}">
+        <span class="err">{{ @errors['approved'] }}</span>
+      </check>
       <br>
       <br>
       <button type="submit" class="btn btn-primary dark-blue-bg float-end">Save</button>
       </form>
+    </check>
   </div>
   <br>
   <br>

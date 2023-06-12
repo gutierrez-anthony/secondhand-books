@@ -64,50 +64,20 @@ $f3->route('GET /about-us', function($f3) {
 });
 
 // Define a book route
-$f3->route('GET /book', function($f3) {
-
-    if(!isset($_GET['id'])){
-        //Redirect to the default route
-        $f3->reroute('/');
-    }
-
-    $book_id = $_GET['id'];
-    $book = $GLOBALS['dataLayer']->getBook($book_id);
-    $f3->set('SESSION.book', $book);
-
-    // Set the title of the page
-    $f3->set('title', $book->getTitle());
-
-
-    // Define a view page
-    $view = new Template();
-    echo $view->render('views/book.html');
+$f3->route('GET /book', function() {
+    $GLOBALS['con']->book();
 });
 
 
 // Define a terms-of-services route
-$f3->route('GET /terms-of-services', function($f3) {
-
-    // Set the title of the page
-    $f3->set('title', "Terms of Services");
-
-
-    // Define a view page
-    $view = new Template();
-    echo $view->render('views/terms-of-services.html');
+$f3->route('GET /terms-of-services', function() {
+    $GLOBALS['con']->termsOfServices();
 });
 
 
 // Define a faq route
-$f3->route('GET /faq', function($f3) {
-
-    // Set the title of the page
-    $f3->set('title', "FAQ");
-
-
-    // Define a view page
-    $view = new Template();
-    echo $view->render('views/faq.html');
+$f3->route('GET /faq', function() {
+    $GLOBALS['con']->faq();
 });
 
 
@@ -151,6 +121,10 @@ $f3->route('GET|POST /profile', function($f3) {
         $f3->reroute('/login');
     }
 
+    if ($f3->get('SESSION.person') instanceof Admin){
+        $f3->reroute('/');
+    }
+
 
     // Set the title of the page
     $f3->set('title', "Profile");
@@ -168,29 +142,8 @@ $f3->route('GET|POST /add-book', function() {
 
 
 // Define a search-results route
-$f3->route('GET|POST /search-results', function($f3) {
-
-    //If the form has been posted
-    if($_SERVER['REQUEST_METHOD'] == "POST"){
-
-        // Get the data
-        $search = (isset($_POST['search'])) ? $_POST['search'] : '';
-
-
-        $f3->set('SESSION.search', $search);
-        $books = $GLOBALS['dataLayer']->search($f3->get('SESSION.search'));
-
-        $f3->set('SESSION.books', $books);
-
-    }
-
-    // Set the title of the page
-    $f3->set('title', "Search Results");
-
-
-    // Define a view page
-    $view = new Template();
-    echo $view->render('views/search-results.html');
+$f3->route('GET|POST /search-results', function() {
+    $GLOBALS['con']->searchResults();
 });
 
 
@@ -205,8 +158,34 @@ $f3->route('GET|POST /admin-dashboard', function($f3) {
         $f3->reroute('/');
     }
 
+    //If the form has been posted
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+        // Get the data
+        $approved = (isset($_POST['approved'])) ? $_POST['approved'] : '';
+
+        // *** If price is not valid, set an error variable
+        if (!Validation::validBookIds($f3, $approved)) {
+            $f3->set('errors["approved"]', 'Invalid value entered');
+        }
+
+        // Redirect to home route if there
+        // are no errors (errors array is empty)
+        if (empty($f3->get('errors'))) {
+            // Looping over the $approved array
+            foreach ($approved as $id) {
+                $GLOBALS['dataLayer']->approveBook($id);
+            }
+            $f3->reroute('/admin-dashboard');
+        }
+    }
+
     // Set the title of the page
     $f3->set('title', "Admin Dashboard");
+
+    $books = $GLOBALS['dataLayer']->getUnapprovedBooks();
+
+    $f3->get('SESSION.person')->setBooksToApprove($books);
 
 
     // Define a view page
@@ -232,28 +211,14 @@ $f3->route('GET|POST /lists', function($f3) {
 
 
 // Define a confirm-email route
-$f3->route('GET /confirm-email/@uuid', function($f3, $params) {
-
-    $uuid = $params['uuid'];
-    $result = $GLOBALS['dataLayer']->confirmEmail($uuid);
-
-
-    if($result){
-        $f3->set('SESSION.alert', 'Your email address is confirmed.');
-    }
-    $f3->reroute('/');
+$f3->route('GET /confirm-email', function() {
+    $GLOBALS['con']->confirmEmail();
 });
 
 
 // Define a logout route
-$f3->route('GET /logout', function($f3) {
-    session_start();
-
-
-    // Destroys session array
-    session_destroy();
-
-    $f3->reroute('/');
+$f3->route('GET /logout', function() {
+    $GLOBALS['con']->logout();
 });
 
 

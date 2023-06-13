@@ -343,8 +343,8 @@ class DataLayer
     function getBooks()
     {
         // 1. define the query
-        $sql = "SELECT *
-                FROM Book WHERE isApproved = 1";
+        $sql = "SELECT * FROM Book WHERE isApproved = 1
+                ORDER BY book_id;";
 
         // 2. prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -367,25 +367,55 @@ class DataLayer
                 $row['description'],
                 $row['subject'],
                 $row['edition']);
+            $book->setBookId($row['book_id']);
             $books[] = $book;
         }
 
         return $books;
     }
 
-    function sortBy($sortType)
+    function getBooksByOwner($personId)
     {
-        // 1. define the query
-        $sql = "SELECT * FROM Book WHERE isApproved = 1
-                ORDER BY :sortType";
+// 1. define the query
+        $sql = "SELECT * FROM Book WHERE owner = " . $personId;
 
         // 2. prepare the statement
         $statement = $this->_dbh->prepare($sql);
 
-        //3. bind the parameters
-        $statement->bindParam(':sortType', $sortType);
-
         //4. Execute
+        $statement->execute();
+
+        // 5. Process the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $books = array();
+
+        foreach ($result as $row){
+            $book = new Book($row['title'],
+                $row['owner'],
+                $row['authors'],
+                $row['price'],
+                $row['photoPath'],
+                $row['photo_name'],
+                $row['description'],
+                $row['subject'],
+                $row['edition']);
+            $book->setBookId($row['book_id']);
+            $books[] = $book;
+        }
+
+        return $books;
+    }
+    function sortBy($sortType)
+    {
+        // 1. Define the query
+        $sql = "SELECT * FROM Book WHERE isApproved = 1
+        ORDER BY " . $sortType;
+
+        // 2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // 3. Execute
         $statement->execute();
 
         // 5. Process the result
@@ -402,6 +432,7 @@ class DataLayer
                 $row['description'],
                 $row['subject'],
                 $row['edition']);
+            $book->setBookId($row['book_id']);
             $books[] = $book;
         }
 

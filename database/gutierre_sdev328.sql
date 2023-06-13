@@ -83,7 +83,9 @@ CREATE TABLE `Person` (
 
 INSERT INTO `Person` (`person_id`, `first_name`, `last_name`, `phone`, `address`, `email`, `is_admin`, `password`, `uuid`, `password_timestamp`, `is_active`) VALUES
 (1, 'Anthony', 'Gutierrez', '1234567890', '', 'gutierrez.anthony@student.greenriver.edu', 1, '$2y$10$boGBB.E4M.YCHn6Y8SWN/e9648FsUSELUEUCjSEesFwBhozFDZL1e', 'de11eeea-09bf-11ee-90fe-f23c91a78bbf', NULL, 0),
-(2, 'Anthony', 'Gutierrez', '1234567890', '1234 Lane, Auburn, WA, 98001', 'gutierrezanthony715@gmail.com', 0, '$2y$10$83aknNASEMjI34jXn5ILLuDgJGhYPYZ4PoFk550VIK4Ml/ltP.1Qq', '1dda9ce6-0a04-11ee-90fe-f23c91a78bbf', NULL, 0);
+(2, 'Anthony', 'Gutierrez', '1234567890', '1234 Lane, Auburn, WA, 98001', 'gutierrezanthony715@gmail.com', 0, '$2y$10$83aknNASEMjI34jXn5ILLuDgJGhYPYZ4PoFk550VIK4Ml/ltP.1Qq', '1dda9ce6-0a04-11ee-90fe-f23c91a78bbf', NULL, 0),
+(6, 'Mehdi', 'Jokar', '2065656710', '608 39Th Ave SW, Apt D20', 'jokar.mehdi2@gmail.com', 0, '$2y$10$rX1A1kT3ipm744HuqPiDDu5G78gRFSNrAO8mCDRUcSIIbO.OpNtS6', 'cf9f4b66-0753-11ee-90fe-f23c91a78bbf', NULL, 1),
+(7, 'Galvin', 'Byrd', '(136) 964-6114', 'Eligendi beatae quis', 'qemynof@mailinator.com', 0, '$2y$10$ERLdCn8HZy9IsNQHF4ijvuH4uiSeh4hGsC6U6LYr/CxioRWc244Bm', '719886ee-08bf-11ee-90fe-f23c91a78bbf', NULL, 0);
 
 --
 -- Indexes for dumped tables

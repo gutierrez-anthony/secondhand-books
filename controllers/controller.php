@@ -380,6 +380,9 @@ class Controller
             $this->_f3->reroute('/');
         }
 
+        $books = $GLOBALS['dataLayer']->getBooksByOwner($this->_f3->get('SESSION.person')->getPersonId());
+
+        $this->_f3->get('SESSION.person')->setBooks($books);
 
         // Set the title of the page
         $this->_f3->set('title', "Profile");

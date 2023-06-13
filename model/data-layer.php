@@ -37,8 +37,8 @@ class DataLayer
 
 
     /**
-     * insertPerson inser a new person from the secondhand-books app
-     * @param Person An Person object
+     * insertPerson insert a new person from the secondhand-books app
+     * @param Person A Person object
      * @return person_id of the new person object
      */
     function insertPerson($person)

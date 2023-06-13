@@ -21,6 +21,31 @@ class Controller
         $this->_f3 = $f3;
     }
 
+    function home()
+    {
+        // Set the title of the page
+        $this->_f3->set('title', "Home");
+        //$alert = 'This alert will be used for showing a successful operation!';
+        $this->_f3->set('alert', $this->_f3->get('SESSION.alert'));
+        $this->_f3->set('SESSION.alert', '');
+
+        // Get the data from the model and add to a new card
+        $this->_f3->set('books', DataLayer::getBooks());
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/home.html');
+    }
+
+    function aboutUs()
+    {
+        // Set the title of the page
+        $this->_f3->set('title', "About Us");
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/about-us.html');
+    }
 
     function contactUs()
     {
@@ -75,6 +100,26 @@ class Controller
         // Define a view page
         $view = new Template();
         echo $view->render('views/contact-us.html');
+    }
+
+    function termsOfServices(){
+        // Set the title of the page
+        $this->_f3->set('title', "Terms of Services");
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/terms-of-services.html');
+    }
+
+    function faq(){
+        // Set the title of the page
+        $this->_f3->set('title', "FAQ");
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/faq.html');
     }
 
     function register()
@@ -196,6 +241,21 @@ class Controller
         echo $view->render('views/login.html');
     }
 
+    function contactOwner()
+    {
+        if (!Validation::loggedIn($this->_f3)) {
+            $this->_f3->reroute('/login');
+        }
+
+
+        // Set the title of the page
+        $this->_f3->set('title', "Contact Owner");
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/contact-owner.html');
+    }
     function addBook()
     {
         if (!Validation::loggedIn($this->_f3)) {
@@ -310,6 +370,26 @@ class Controller
         echo $view->render('views/add-book.html');
     }
 
+    function profile()
+    {
+        if (!Validation::loggedIn($this->_f3)) {
+            $this->_f3->reroute('/login');
+        }
+
+        if ($this->_f3->get('SESSION.person') instanceof Admin){
+            $this->_f3->reroute('/');
+        }
+
+
+        // Set the title of the page
+        $this->_f3->set('title', "Profile");
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/profile.html');
+    }
+
     function confirmEmail()
     {
         if(!isset($_GET['uuid'])){
@@ -327,14 +407,63 @@ class Controller
         $this->_f3->reroute('/');
     }
 
-    function logout(){
-        session_start();
+    function adminDashboard()
+    {
+        if (!Validation::loggedIn($this->_f3)) {
+            $this->_f3->reroute('/login');
+        }
+
+        if ($this->_f3->get('SESSION.person') instanceof User){
+            $this->_f3->reroute('/');
+        }
+
+        //If the form has been posted
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            // Get the data
+            $approved = (isset($_POST['approved'])) ? $_POST['approved'] : '';
+
+            // *** If price is not valid, set an error variable
+            if (!Validation::validBookIds($this->_f3, $approved)) {
+                $this->_f3->set('errors["approved"]', 'Invalid value entered');
+            }
+
+            // Redirect to home route if there
+            // are no errors (errors array is empty)
+            if (empty($this->_f3->get('errors'))) {
+                // Looping over the $approved array
+                foreach ($approved as $id) {
+                    $GLOBALS['dataLayer']->approveBook($id);
+                }
+                $this->_f3->reroute('/admin-dashboard');
+            }
+        }
+
+        // Set the title of the page
+        $this->_f3->set('title', "Admin Dashboard");
+
+        $books = $GLOBALS['dataLayer']->getUnapprovedBooks();
+
+        $this->_f3->get('SESSION.person')->setBooksToApprove($books);
 
 
-        // Destroys session array
-        session_destroy();
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/admin-dashboard.html');
+    }
 
-        $this->_f3->reroute('/');
+    function listings()
+    {
+        // Get the data from the model and add to a new card
+        $this->_f3->set('books', DataLayer::getBooks());
+
+        // Set the title of the page
+        $this->_f3->set('title', "Lists");
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/lists.html');
     }
 
     function searchResults(){
@@ -361,26 +490,6 @@ class Controller
         echo $view->render('views/search-results.html');
     }
 
-    function faq(){
-        // Set the title of the page
-        $this->_f3->set('title', "FAQ");
-
-
-        // Define a view page
-        $view = new Template();
-        echo $view->render('views/faq.html');
-    }
-
-    function termsOfServices(){
-        // Set the title of the page
-        $this->_f3->set('title', "Terms of Services");
-
-
-        // Define a view page
-        $view = new Template();
-        echo $view->render('views/terms-of-services.html');
-    }
-
     function book(){
         if(!isset($_GET['id'])){
             //Redirect to the default route
@@ -400,4 +509,13 @@ class Controller
         echo $view->render('views/book.html');
     }
 
+    function logout(){
+        session_start();
+
+
+        // Destroys session array
+        session_destroy();
+
+        $this->_f3->reroute('/');
+    }
 }

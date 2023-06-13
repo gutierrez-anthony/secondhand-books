@@ -326,7 +326,7 @@ class Controller
                 }
 
                 if($file_size > 2097152){
-                    $errors[]='File size must be excately 2 MB';
+                    $errors[]='File size must be exactly 2 MB';
                 }
 
                 if(empty($errors)==true){
@@ -346,7 +346,7 @@ class Controller
             // are no errors (errors array is empty)
             if (empty($this->_f3->get('errors'))) {
                 $owner = $this->_f3->get('SESSION.person')->getPersonId();
-                $book = new Book($title, $owner, $authors, $price, $target_file, $file_name, $description, $subject);
+                $book = new Book($title, $owner, $authors, $price, $target_file, $file_name, $description, $subject, $edition);
                 $this->_f3->set('SESSION.book', $book);
                 $book_id = $GLOBALS['dataLayer']->insertBook($this->_f3->get('SESSION.book'));
                 if(!empty($book_id)){

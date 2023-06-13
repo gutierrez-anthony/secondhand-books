@@ -64,35 +64,22 @@ Date: 5/26/2023
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><a href="book" class="text-decoration-none text-color-dark">Book one</a></td>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" checked disabled>
-                    </div>
-                </td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-danger dark-red-bg">Delete</button>
-                        <button type="button" class="btn btn-primary dark-blue-bg">Edit</button>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="book" class="text-decoration-none text-color-dark">Book two</a></td>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" disabled>
-                    </div>
-                </td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-danger dark-red-bg">Delete</button>
-                        <button type="button" class="btn btn-primary dark-blue-bg">Edit</button>
-                    </div>
-                </td>
-            </tr>
-            <!-- Add more rows as needed -->
+                <repeat group="{{ @SESSION.person->getBooks() }}" value="{{ @book }}">
+                    <tr>
+                        <td><a href="book?id={{ @book->getBookId() }}" class="text-decoration-none text-color-dark">{{ @book->getTitle() }}</a></td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{ @book->getIsApproved() }}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger dark-red-bg">Delete</button>
+                                <button type="button" class="btn btn-primary dark-blue-bg">Edit</button>
+                            </div>
+                        </td>
+                    </tr>
+                </repeat>
             </tbody>
         </table>
     </div>

@@ -96,13 +96,13 @@ $f3->route('GET /confirm-email', function() {
 
 
 // Define a admin-dashboard route
-$f3->route('GET|POST /admin-dashboard', function($f3) {
+$f3->route('GET|POST /admin-dashboard', function() {
     $GLOBALS['con']->adminDashboard();
 });
 
 
 // Define a lists route
-$f3->route('GET|POST /lists', function($f3) {
+$f3->route('GET|POST /lists', function() {
     $GLOBALS['con']->listings();
 });
 

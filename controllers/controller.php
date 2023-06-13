@@ -454,11 +454,20 @@ class Controller
 
     function listings()
     {
-        // Get the data from the model and add to a new card
-        $this->_f3->set('books', $GLOBALS['dataLayer']->getBooks());
+        if($_SERVER['REQUEST_METHOD'] == "POST") {
+            // Get the data
+            $sortBy = (isset($_POST['sort'])) ? $_POST['sort'] : '';
+
+            $this->_f3->set('SESSION.sort', $sortBy);
+
+            $books = $GLOBALS['dataLayer']->sortBy($this->_f3->get('SESSION.sort'));
+
+            // Get the data from the model and add to a new card
+            $this->_f3->set('SESSION.books', $books);
+        }
 
         // Set the title of the page
-        $this->_f3->set('title', "Lists");
+        $this->_f3->set('title', "Listings");
 
 
         // Define a view page

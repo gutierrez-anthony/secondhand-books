@@ -30,20 +30,21 @@ Date: 5/26/2023
       </div>
 </form>
     <div class="d-flex flex-row flex-wrap justify-content-center mt-2">
-      <repeat group="{{ @SESSION.books }}" value="{{ @book }}">
-        <div class="card m-3">
-          <img src="{{ @book->getPhotoPath() }}" class="card-img-top" alt="{{ @SESSION.book->getPhotoName() }}">
-          <div class="card-body m-auto">
-            <h5 class="card-title">{{ @book->getTitle() }}</h5>
-            <p class="card-text">Author: {{ @book->getAuthors() }}
-              <br>
-              Edition: {{ @book->getEdition() }}
-            </p>
-            <a href="book?id={{ @book->getBookId() }}" class="btn btn-primary dark-blue-bg">More Details</a>
+      <check if="{{ isset(@SESSION.books) }}">
+        <repeat group="{{ @SESSION.books }}" value="{{ @book }}">
+          <div class="card m-3">
+            <img src="{{ @book->getPhotoPath() }}" class="card-img-top" alt="{{ @book->getPhotoName() }}">
+            <div class="card-body m-auto">
+              <h5 class="card-title">{{ @book->getTitle() }}</h5>
+              <p class="card-text">Author: {{ @book->getAuthors() }}
+                <br>
+                Edition: {{ @book->getEdition() }}
+              </p>
+              <a href="book?id={{ @book->getBookId() }}" class="btn btn-primary dark-blue-bg">More Details</a>
+            </div>
           </div>
-        </div>
-      </repeat>
-
+        </repeat>
+      </check>
 
   </div>
   </div>

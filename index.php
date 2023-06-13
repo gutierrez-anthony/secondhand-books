@@ -21,6 +21,7 @@ $dataLayer = new DataLayer();
 $f3 = Base::instance();
 $con = new Controller($f3);
 $f3->OUR_EMAIL = 'jokar.mehdi@student.greenriver.edu';
+//$f3->start();
 
 
 // Define a default route for home

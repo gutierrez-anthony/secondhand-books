@@ -461,12 +461,16 @@ class Controller
             // Get the data
             $sortBy = (isset($_POST['sort'])) ? $_POST['sort'] : '';
 
-            $this->_f3->set('SESSION.sort', $sortBy);
+            if (Validation::validateSorting($sortBy)) {
+                $this->_f3->set('SESSION.sort', $sortBy);
 
-            $books = $GLOBALS['dataLayer']->sortBy($this->_f3->get('SESSION.sort'));
-
-            // Get the data from the model and add to a new card
-            $this->_f3->set('SESSION.books', $books);
+                $books = $GLOBALS['dataLayer']->sortBy($this->_f3->get('SESSION.sort'));
+                // Get the data from the model and add to a new card
+                $this->_f3->set('SESSION.books', $books);
+            }
+            else {
+                $this->_f3->set('errors["sortBy"]', 'Invalid Selection');
+            }
         }
 
         // Set the title of the page

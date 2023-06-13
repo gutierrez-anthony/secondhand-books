@@ -12,9 +12,9 @@
 class Validation
 {
     /**
-    This function checks to see that a
-    string is all alphabetic (no numbers)
-    and not empty
+     * This function checks to see that a
+     * string is all alphabetic (no numbers)
+     * and not empty
      */
     static function validName($name)
     {
@@ -28,10 +28,9 @@ class Validation
     }
 
 
-
     /**
-    This function checks to see
-    that an email address is valid.
+     * This function checks to see
+     * that an email address is valid.
      */
     static function validEmail($email)
     {
@@ -40,9 +39,9 @@ class Validation
 
 
     /**
-    This function checks to see that
-    a string is a valid phone number
-    with 10 digits.
+     * This function checks to see that
+     * a string is a valid phone number
+     * with 10 digits.
      */
     static function validPhone($phoneNumber)
     {
@@ -97,7 +96,8 @@ class Validation
      * @param $password password
      * @return bool true if password is valid
      */
-    static function validatePassword($password) {
+    static function validatePassword($password)
+    {
         // Password length should be between 8 and 20 characters
         if (strlen($password) < 8 || strlen($password) > 20) {
             return false;
@@ -122,7 +122,8 @@ class Validation
      * @param $confirmPassword second password
      * @return bool true is password equals confirmed password
      */
-    static function validateConfirmPassword($password, $confirmPassword) {
+    static function validateConfirmPassword($password, $confirmPassword)
+    {
         // Check if the password and confirm password match
         if ($password !== $confirmPassword) {
             return false;
@@ -143,7 +144,8 @@ class Validation
     /**
      * Check that price is valid
      */
-    static function validatePrice($price) {
+    static function validatePrice($price)
+    {
         // Remove any non-numeric characters except decimal point
         $cleanedPrice = preg_replace('/[^0-9.]/', '', $price);
 
@@ -173,7 +175,8 @@ class Validation
      * Check the add book fields not being
      * empty ro less than five character
      */
-    static function validateBookField($fieldValue) {
+    static function validateBookField($fieldValue)
+    {
         // Remove leading and trailing white spaces
         $trimmedValue = trim($fieldValue);
 
@@ -204,7 +207,7 @@ class Validation
 
         //
         foreach ($book_ids as $id) {
-            if (!in_array($id, $valid_ids)){
+            if (!in_array($id, $valid_ids)) {
                 return false;
             }
         }
@@ -212,6 +215,8 @@ class Validation
         return true;
     }
 
-
-
+    static function validateSorting($selectedChoices)
+    {
+        return (in_array($selectedChoices, DataLayer::getSortingChoices()));
+    }
 }

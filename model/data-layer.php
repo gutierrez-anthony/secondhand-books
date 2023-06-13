@@ -376,7 +376,7 @@ class DataLayer
 
     function getBooksByOwner($personId)
     {
-// 1. define the query
+        // 1. define the query
         $sql = "SELECT * FROM Book WHERE owner = " . $personId;
 
         // 2. prepare the statement
@@ -406,6 +406,13 @@ class DataLayer
 
         return $books;
     }
+
+    static function getSortingChoices()
+    {
+        $choices = array("title", "authors", "subject", "price");
+        return $choices;
+    }
+
     function sortBy($sortType)
     {
         // 1. Define the query

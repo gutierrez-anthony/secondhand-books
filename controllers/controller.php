@@ -30,7 +30,7 @@ class Controller
         $this->_f3->set('SESSION.alert', '');
 
         // Get the data from the model and add to a new card
-        $this->_f3->set('books', DataLayer::getBooks());
+        $this->_f3->set('books', $GLOBALS['dataLayer']->getBooks());
 
         // Define a view page
         $view = new Template();
@@ -455,7 +455,7 @@ class Controller
     function listings()
     {
         // Get the data from the model and add to a new card
-        $this->_f3->set('books', DataLayer::getBooks());
+        $this->_f3->set('books', $GLOBALS['dataLayer']->getBooks());
 
         // Set the title of the page
         $this->_f3->set('title', "Lists");

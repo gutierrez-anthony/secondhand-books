@@ -10,16 +10,16 @@ Date: 5/8/2023
 <!-- Add a book taken from the array in the model-->
 <main class="container-fluid mb-5">
 <div class="d-flex flex-row flex-wrap justify-content-center mt-2">
-<repeat group="{{ @books }}" value="{{ @book }}">
+<repeat group="{{ @SESSION.books }}" value="{{ @book }}">
     <div class="card m-3">
-        <img src="images/default_book.jpg" class="card-img-top" alt="default_book.jpg">
+        <img src="{{ @book->getPhotoPath() }}" class="card-img-top" alt="{{ @SESSION.book->getPhotoName() }}">
         <div class="card-body m-auto">
-            <h5 class="card-title">{{ ucfirst(@book) }}</h5>
-            <p class="card-text">Author
+            <h5 class="card-title">{{ @book->getTitle() }}</h5>
+            <p class="card-text">Author: {{ @book->getAuthors() }}
                 <br>
-                Edition
+                Edition: {{ @book->getEdition() }}
             </p>
-            <a href="#" class="btn btn-primary dark-blue-bg">More Details</a>
+            <a href="book?id={{ @book->getBookId() }}" class="btn btn-primary dark-blue-bg">More Details</a>
         </div>
     </div>
 </repeat>

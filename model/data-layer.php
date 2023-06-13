@@ -340,9 +340,33 @@ class DataLayer
 
         return true;
     }
-    static function getBooks()
+    function getBooks()
     {
-        $books = array("book one", "book two", "book three", "book four");
+        // 1. define the query
+        $sql = "SELECT *
+                FROM Book";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //4. Execute
+        $statement->execute();
+
+        // 5. Process the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $books = array();
+
+        foreach ($result as $row){
+            $book = new Book($row['title'],
+                $row['authors'],
+                $row['photoPath'],
+                $row['photo_name'],
+                $row['edition']);
+            $book->setBookId($row['book_id']);
+            $books[] = $book;
+        }
+
         return $books;
     }
 

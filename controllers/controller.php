@@ -23,14 +23,18 @@ class Controller
 
     function home()
     {
+
         // Set the title of the page
         $this->_f3->set('title', "Home");
         //$alert = 'This alert will be used for showing a successful operation!';
         $this->_f3->set('alert', $this->_f3->get('SESSION.alert'));
         $this->_f3->set('SESSION.alert', '');
 
+        $books = $GLOBALS['dataLayer']->getBooks();
+        $this->_f3->set('SESSION.books', $books);
+
         // Get the data from the model and add to a new card
-        $this->_f3->set('books', $GLOBALS['dataLayer']->getBooks());
+        $this->_f3->set('books', $this->_f3->get('SESSION.books'));
 
         // Define a view page
         $view = new Template();
@@ -482,7 +486,8 @@ class Controller
         echo $view->render('views/lists.html');
     }
 
-    function searchResults(){
+    function searchResults()
+    {
         //If the form has been posted
         if($_SERVER['REQUEST_METHOD'] == "POST"){
 
@@ -506,7 +511,8 @@ class Controller
         echo $view->render('views/search-results.html');
     }
 
-    function book(){
+    function book()
+    {
         if(!isset($_GET['id'])){
             //Redirect to the default route
             $this->_f3->reroute('/');
@@ -525,7 +531,8 @@ class Controller
         echo $view->render('views/book.html');
     }
 
-    function logout(){
+    function logout()
+    {
         session_start();
 
 
@@ -533,5 +540,29 @@ class Controller
         session_destroy();
 
         $this->_f3->reroute('/');
+    }
+
+    function editBook()
+    {
+        if (!Validation::loggedIn($this->_f3)) {
+            $this->_f3->reroute('/login');
+        }
+
+        if ($this->_f3->get('SESSION.person') instanceof Admin){
+            $this->_f3->reroute('/');
+        }
+
+        if(!isset($_GET['id'])){
+            //Redirect to the default route
+            $this->_f3->reroute('/');
+        }
+
+        $book_id = $_GET['id'];
+        $book = $GLOBALS['dataLayer']->getBook($book_id);
+        $this->_f3->set('SESSION.book', $book);
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/edit-book.html');
     }
 }

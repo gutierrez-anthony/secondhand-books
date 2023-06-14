@@ -120,6 +120,12 @@ $f3->route('GET /book', function() {
 });
 
 
+// Define an edit book route
+$f3->route('GET /edit-book', function() {
+    $GLOBALS['con']->editBook();
+});
+
+
 // Define a logout route
 $f3->route('GET /logout', function() {
     $GLOBALS['con']->logout();

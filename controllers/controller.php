@@ -384,9 +384,64 @@ class Controller
             $this->_f3->reroute('/');
         }
 
-        $books = $GLOBALS['dataLayer']->getBooksByOwner($this->_f3->get('SESSION.person')->getPersonId());
 
+        //If the form has been posted
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            // Get the data
+            $first_name = (isset($_POST['firstName'])) ? $_POST['firstName'] : '';
+            $last_name = (isset($_POST['lastName'])) ? $_POST['lastName'] : '';
+            $email = (isset($_POST['email'])) ? $_POST['email'] : '';
+            $phone = (isset($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : '';
+            $address = (isset($_POST['address'])) ? $_POST['address'] : '';
+
+            // *** If first name is not valid, set an error variable
+            if (!Validation::validName($first_name)) {
+                $this->_f3->set('errors["fname"]', 'Invalid first name entered');
+            }
+
+            // *** If last name is not valid, set an error variable
+            if (!Validation::validName($last_name)) {
+                $this->_f3->set('errors["lname"]', 'Invalid last name entered');
+            }
+
+            // *** If email is not valid, set an error variable
+            if (!Validation::validEmail($email)) {
+                $this->_f3->set('errors["email"]', 'Invalid email entered');
+            }
+
+            // *** If phone is not valid, set an error variable
+            if (!Validation::validPhone($phone)) {
+                $this->_f3->set('errors["phone"]', 'Phone number should be 10 digits.');
+            }
+
+
+            // Redirect to home route if there
+            // are no errors (errors array is empty)
+            if (empty($this->_f3->get('errors'))) {
+                $password = $this->_f3->get('SESSION.person')->getPassword();
+                $person = new Person($first_name, $last_name, $email, $password, $phone, $address);
+                $person->setPersonId($this->_f3->get('SESSION.person')->getPersonId());
+                $GLOBALS['dataLayer']->updatePerson($person);
+
+
+                $this->_f3->set('SESSION.alert', 'Your information is updated successfully.');
+
+
+                $this->_f3->reroute('/');
+            }
+        }
+
+
+        $books = $GLOBALS['dataLayer']->getBooksByOwner($this->_f3->get('SESSION.person')->getPersonId());
+        $person = $GLOBALS['dataLayer']->getPerson($this->_f3->get('SESSION.person')->getPersonId());
         $this->_f3->get('SESSION.person')->setBooks($books);
+        $this->_f3->get('SESSION.person')->setFname($person->getFname());
+        $this->_f3->get('SESSION.person')->setLname($person->getLname());
+        $this->_f3->get('SESSION.person')->setEmail($person->getEmail());
+        $this->_f3->get('SESSION.person')->setAddress($person->getAddress());
+        $this->_f3->get('SESSION.person')->setPhone($person->getPhone());
+
 
         // Set the title of the page
         $this->_f3->set('title', "Profile");
@@ -552,43 +607,6 @@ class Controller
             $this->_f3->reroute('/');
         }
 
-        //If the form has been posted
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
-
-            // Get the data
-            $title = (isset($_POST['title'])) ? $_POST['title'] : '';
-            $authors = (isset($_POST['authors'])) ? $_POST['authors'] : '';
-            $edition = (isset($_POST['edition'])) ? $_POST['edition'] : '';
-            $subject = (isset($_POST['subject'])) ? $_POST['subject'] : '';
-            $price = (isset($_POST['price'])) ? $_POST['price'] : '';
-            $description = (isset($_POST['description'])) ? $_POST['description'] : '';
-
-            // *** If price is not valid, set an error variable
-            if (!Validation::validatePrice($price)) {
-                $this->_f3->set('errors["price"]', 'Invalid price entered');
-            }
-
-            // *** If title is not valid, set an error variable
-            if (!Validation::validateBookField($title)) {
-                $this->_f3->set('errors["title"]', 'Invalid title entered');
-            }
-
-            // *** If authors is not valid, set an error variable
-            if (!Validation::validateBookField($authors)) {
-                $this->_f3->set('errors["authors"]', 'Invalid authors entered');
-            }
-
-            // *** If edition is not valid, set an error variable
-            if (!Validation::validateBookField($edition)) {
-                $this->_f3->set('errors["edition"]', 'Invalid edition entered');
-            }
-
-            // *** If subject is not valid, set an error variable
-            if (!Validation::validateBookField($subject)) {
-                $this->_f3->set('errors["subject"]', 'Invalid subject entered');
-            }
-        }
-
         if(!isset($_GET['id'])){
             //Redirect to the default route
             $this->_f3->reroute('/');
@@ -597,6 +615,15 @@ class Controller
         $book_id = $_GET['id'];
         $book = $GLOBALS['dataLayer']->getBook($book_id);
         $this->_f3->set('SESSION.book', $book);
+
+        // If person is not the owner reroute to home
+        if ($this->_f3->get('SESSION.person')->getPersonId() != $book->getOwner()){
+            $this->_f3->reroute('/');
+        }
+
+        // Set the title of the page
+        $this->_f3->set('title', "Edit: " . $book->getTitle());
+
 
         // Define a view page
         $view = new Template();

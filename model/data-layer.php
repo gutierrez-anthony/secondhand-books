@@ -77,6 +77,46 @@ class DataLayer
     }
 
 
+
+    /**
+     * updatePerson update a person from the secondhand-books app
+     * @param Person A Person object
+     * @return person_id of the new person object
+     */
+    function updatePerson($person)
+    {
+        // Prepare the SQL statement
+        $sql = "UPDATE Person SET first_name = :first_name, last_name = :last_name,
+        phone = :phone, address = :address, email = :email
+        WHERE person_id = :person_id";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $first_name = $person->getFname();
+        $last_name = $person->getLname();
+        $phone = $person->getPhone();
+        $address = $person->getAddress();
+        $email = $person->getEmail();
+        $id = $person->getPersonId();
+
+
+        $statement->bindParam(':first_name', $first_name);
+        $statement->bindParam(':last_name', $last_name);
+        $statement->bindParam(':phone', $phone);
+        $statement->bindParam(':address', $address);
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':person_id', $id);
+
+
+        //4. Execute
+        $statement->execute();
+
+        return $id;
+    }
+
+
     /**
      * This function returns a user or an admin
      * based on person's is_admin column
@@ -108,7 +148,6 @@ class DataLayer
         } else {
             $person = new Admin($row['first_name'], $row['last_name'],
                 $row['email'], $row['password'], $row['phone'], $row['address']);
-
         }
         $person->setUuid($row['uuid']);
         return $person;
@@ -284,15 +323,8 @@ class DataLayer
         $books = array();
 
         foreach ($result as $row){
-            $book = new Book($row['title'],
-                $row['owner'],
-                $row['authors'],
-                $row['price'],
-                $row['photoPath'],
-                $row['photo_name'],
-                $row['description'],
-                $row['subject'],
-                $row['edition']);
+            $book = new Book($row['title'], $row['owner'], $row['authors'],
+                $row['price'], $row['photoPath'], $row['photo_name'], $row['description'], $row['subject'], $row['edition']);
             $book->setBookId($row['book_id']);
             $books[] = $book;
         }

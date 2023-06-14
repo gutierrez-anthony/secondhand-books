@@ -16,32 +16,44 @@ Date: 5/26/2023
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName" class="form-label">First Name*</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                    <input type="text" class="form-control" id="firstName" value="{{ @SESSION.person->getFname() }}" name="firstName"  required>
+
+                    <!-- Display an error if there is one -->
+                    <check if="{{ isset(@errors['fname']) }}">
+                        <span class="err">{{ @errors['fname'] }}</span>
+                    </check>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName" class="form-label">Last Name*</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name" required>
+                    <input type="text" class="form-control" id="lastName" value="{{ @SESSION.person->getLname() }}" name="lastName"  required>
+
+                    <!-- Display an error if there is one -->
+                    <check if="{{ isset(@errors['lname']) }}">
+                        <span class="err">{{ @errors['lname'] }}</span>
+                    </check>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email*</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" class="form-control" id="email" value="{{ @SESSION.person->getEmail() }}" name="email"  required>
+
+                <!-- Display an error if there is one -->
+                <check if="{{ isset(@errors['email']) }}">
+                    <span class="err">{{ @errors['email'] }}</span>
+                </check>
             </div>
             <div class="mb-3">
                 <label for="phoneNumber" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password*</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-            <div class="mb-3">
-                <label for="confirmPassword" class="form-label">Confirm Password*</label>
-                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                <input type="text" class="form-control" id="phoneNumber" value="{{ @SESSION.person->getPhone() }}" name="phoneNumber" >
+
+                <!-- Display an error if there is one -->
+                <check if="{{ isset(@errors['phone']) }}">
+                    <span class="err">{{ @errors['phone'] }}</span>
+                </check>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <textarea class="form-control" id="address" rows="3" name="address" placeholder="Enter your address"></textarea>
+                <input class="form-control" id="address" value="{{ @SESSION.person->getAddress() }}" name="address"></input>
             </div>
             <button type="submit" class="btn btn-primary dark-blue-bg float-end">Save</button>
         </form>
@@ -87,7 +99,7 @@ Date: 5/26/2023
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-danger dark-red-bg">Delete</button>
-                                <a href="edit-book?id={{ @book->getBookId() }}" type="button" class="btn btn-primary dark-blue-bg">Edit</a>
+                                <button type="button" class="btn btn-primary dark-blue-bg">Edit</button>
                             </div>
                         </td>
                     </tr>

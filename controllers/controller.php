@@ -552,6 +552,43 @@ class Controller
             $this->_f3->reroute('/');
         }
 
+        //If the form has been posted
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            // Get the data
+            $title = (isset($_POST['title'])) ? $_POST['title'] : '';
+            $authors = (isset($_POST['authors'])) ? $_POST['authors'] : '';
+            $edition = (isset($_POST['edition'])) ? $_POST['edition'] : '';
+            $subject = (isset($_POST['subject'])) ? $_POST['subject'] : '';
+            $price = (isset($_POST['price'])) ? $_POST['price'] : '';
+            $description = (isset($_POST['description'])) ? $_POST['description'] : '';
+
+            // *** If price is not valid, set an error variable
+            if (!Validation::validatePrice($price)) {
+                $this->_f3->set('errors["price"]', 'Invalid price entered');
+            }
+
+            // *** If title is not valid, set an error variable
+            if (!Validation::validateBookField($title)) {
+                $this->_f3->set('errors["title"]', 'Invalid title entered');
+            }
+
+            // *** If authors is not valid, set an error variable
+            if (!Validation::validateBookField($authors)) {
+                $this->_f3->set('errors["authors"]', 'Invalid authors entered');
+            }
+
+            // *** If edition is not valid, set an error variable
+            if (!Validation::validateBookField($edition)) {
+                $this->_f3->set('errors["edition"]', 'Invalid edition entered');
+            }
+
+            // *** If subject is not valid, set an error variable
+            if (!Validation::validateBookField($subject)) {
+                $this->_f3->set('errors["subject"]', 'Invalid subject entered');
+            }
+        }
+
         if(!isset($_GET['id'])){
             //Redirect to the default route
             $this->_f3->reroute('/');

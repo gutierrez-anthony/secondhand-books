@@ -16,6 +16,8 @@ Date: 6/13/2023
       <div class="mb-3">
         <label for="image" class="form-label">Upload Image</label>
         <input type="file" class="form-control" id="image" name="image">
+        <img src="{{ @SESSION.book->getPhotoPath() }}" class="float-end img-fluid" alt="{{ @SESSION.book->getPhotoName() }}">
+
 
         <!-- Display an error if there is one -->
         <check if="{{ isset(@errors['image']) }}">
@@ -26,7 +28,7 @@ Date: 6/13/2023
       </div>
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" name="title" required>
+        <input type="text" class="form-control" id="title" name="title" value="{{ @SESSION.book->getTitle() }}" required>
 
         <!-- Display an error if there is one -->
         <check if="{{ isset(@errors['title']) }}">
@@ -35,7 +37,7 @@ Date: 6/13/2023
       </div>
       <div class="mb-3">
         <label for="authors" class="form-label">Authors</label>
-        <input type="text" class="form-control" id="authors" name="authors" required>
+        <input type="text" class="form-control" id="authors" name="authors" value="{{ @SESSION.book->getAuthors() }}" required>
 
         <!-- Display an error if there is one -->
         <check if="{{ isset(@errors['authors']) }}">
@@ -44,7 +46,7 @@ Date: 6/13/2023
       </div>
       <div class="mb-3">
         <label for="edition" class="form-label">Edition</label>
-        <input type="text" class="form-control" id="edition" name="edition" required>
+        <input type="text" class="form-control" id="edition" name="edition" value="{{ @SESSION.book->getEdition() }}" required>
 
         <!-- Display an error if there is one -->
         <check if="{{ isset(@errors['edition']) }}">
@@ -54,7 +56,7 @@ Date: 6/13/2023
 
       <div class="mb-3">
         <label for="subject" class="form-label">Subject</label>
-        <input type="text" class="form-control" id="subject" name="subject" required>
+        <input type="text" class="form-control" id="subject" name="subject" value="{{ @SESSION.book->getSubject() }}" required>
 
         <!-- Display an error if there is one -->
         <check if="{{ isset(@errors['subject']) }}">
@@ -63,7 +65,8 @@ Date: 6/13/2023
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">Price</label>
-        <input type="number" step="0.01" min="0" placeholder="Enter price" class="form-control" id="price" name="price" required>
+        <input type="number" step="0.01" min="0" value="{{ @SESSION.book->getPrice() }}"
+               placeholder="Enter price" class="form-control" id="price" name="price" required>
 
         <!-- Display an error if there is one -->
         <check if="{{ isset(@errors['price']) }}">
@@ -72,12 +75,12 @@ Date: 6/13/2023
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+        <textarea class="form-control" id="description" rows="3" name="description" value="{{ @SESSION.book->getDescription() }}" ></textarea>
 
       </div>
       <br>
       <div class="text-center">
-        <button type="submit" class="btn btn-primary dark-blue-bg">Submit</button>
+        <button type="submit" class="btn btn-primary dark-blue-bg">Save</button>
       </div>
     </form>
 

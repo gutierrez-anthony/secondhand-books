@@ -284,8 +284,15 @@ class DataLayer
         $books = array();
 
         foreach ($result as $row){
-            $book = new Book($row['title'], $row['owner'], $row['authors'],
-                $row['price'], $row['photoPath'], $row['photo_name'], $row['description'], $row['subject'], $row['edition']);
+            $book = new Book($row['title'],
+                $row['owner'],
+                $row['authors'],
+                $row['price'],
+                $row['photoPath'],
+                $row['photo_name'],
+                $row['description'],
+                $row['subject'],
+                $row['edition']);
             $book->setBookId($row['book_id']);
             $books[] = $book;
         }

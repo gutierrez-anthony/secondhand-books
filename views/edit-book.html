@@ -1,0 +1,90 @@
+<!--
+HTML markup for the Secondhand Book Edit book page.
+Author: Anthony Gutierrez, Mehdi Jokar
+File: edit-book.html
+Date: 6/13/2023
+-->
+<include href="views/includes/header.html"></include>
+
+
+<main class="container-fluid mb-5">
+  <div class="container w-75">
+    <h1>Edit {{ @SESSION.book->getTitle() }}</h1>
+    <br>
+    <br>
+    <form action="#" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload Image</label>
+        <input type="file" class="form-control" id="image" name="image">
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['image']) }}">
+          <repeat group="{{ @errors['image'] }}" value="{{ @error }}">
+            <span class="small-font err">{{ @error }}</span><br>
+          </repeat>
+        </check>
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['title']) }}">
+          <span class="err">{{ @errors['title'] }}</span>
+        </check>
+      </div>
+      <div class="mb-3">
+        <label for="authors" class="form-label">Authors</label>
+        <input type="text" class="form-control" id="authors" name="authors" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['authors']) }}">
+          <span class="err">{{ @errors['authors'] }}</span>
+        </check>
+      </div>
+      <div class="mb-3">
+        <label for="edition" class="form-label">Edition</label>
+        <input type="text" class="form-control" id="edition" name="edition" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['edition']) }}">
+          <span class="err">{{ @errors['edition'] }}</span>
+        </check>
+      </div>
+
+      <div class="mb-3">
+        <label for="subject" class="form-label">Subject</label>
+        <input type="text" class="form-control" id="subject" name="subject" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['subject']) }}">
+          <span class="err">{{ @errors['subject'] }}</span>
+        </check>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" step="0.01" min="0" placeholder="Enter price" class="form-control" id="price" name="price" required>
+
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['price']) }}">
+          <span class="err">{{ @errors['price'] }}</span>
+        </check>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+
+      </div>
+      <br>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary dark-blue-bg">Submit</button>
+      </div>
+    </form>
+
+  </div>
+  <br>
+  <br>
+  <br>
+</main>
+
+<include href="views/includes/footer.html"></include>

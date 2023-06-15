@@ -1,0 +1,69 @@
+<!--
+HTML markup for the Secondhand Book's Book page.
+Author: Anthony Gutierrez, Mehdi Jokar
+File: book.html
+Date: 5/25/2023
+-->
+<include href="views/includes/header.html"></include>
+
+
+<main class="container-fluid mb-5">
+  <div class="container w-75">
+  <h3>Delete Confirmation</h3>
+  <form method="POST" action="#" class="mb-3">
+    <div class="alert alert-danger" role="alert">
+      Are you sure you want to delete this book?
+    </div>
+    <button type="submit" class="btn btn-danger dark-red-bg">Delete</button>
+    <a href="profile" class="btn btn-primary dark-blue-bg">Cancel</a>
+  </form>
+  </div>
+  <hr>
+  <div class="container w-75">
+    <div class="row my-4">
+      <div class="col-5">
+        <div class="row">
+          <div class="col">
+            <P><b>Title:</b> {{ @SESSION.book->getTitle() }}</P>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <P><b>Authors:</b> {{ @SESSION.book->getAuthors() }}</P>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <P><b>Edition:</b> {{ @SESSION.book->getEdition() }}</P>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <P><b>Subject:</b> {{ @SESSION.book->getSubject() }}</P>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <P><b>Price:</b> ${{ @SESSION.book->getPrice() }}</P>
+          </div>
+        </div>
+      </div>
+      <div class="col-7">
+        <img src="{{ @SESSION.book->getPhotoPath() }}" class="float-end img-fluid" alt="{{ @SESSION.book->getPhotoName() }}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <!--Description-->
+        <P><b>Description:</b></P>
+        <p>{{ @SESSION.book->getDescription() }}</p>
+      </div>
+    </div>
+
+  </div>
+  <br>
+  <br><br>
+</main>
+
+<include href="views/includes/footer.html"></include>
+

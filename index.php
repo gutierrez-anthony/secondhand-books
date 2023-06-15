@@ -126,6 +126,12 @@ $f3->route('GET|POST /edit-book', function() {
 });
 
 
+// Define an delete book route
+$f3->route('GET|POST /delete-book', function() {
+    $GLOBALS['con']->deleteBook();
+});
+
+
 // Define a logout route
 $f3->route('GET /logout', function() {
     $GLOBALS['con']->logout();

@@ -74,7 +74,7 @@ a img {
 /**
 The styling for alert.
  */
-.alert {
+#myAlert {
     padding: 20px;
     background-color: #92C744;
     color: white;

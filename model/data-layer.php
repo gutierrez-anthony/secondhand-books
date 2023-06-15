@@ -537,4 +537,23 @@ class DataLayer
         return $books;
     }
 
+    function deleteBook($book_id)
+    {
+        // 1. define the query
+        $sql = "DELETE FROM Book WHERE book_id = :book_id;";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. bind the parameters
+        $statement->bindParam(':book_id', $book_id);
+
+        //4. Execute
+        $statement->execute();
+
+
+        return $book_id;
+    }
+
+
 }

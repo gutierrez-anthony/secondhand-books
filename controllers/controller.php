@@ -684,4 +684,50 @@ class Controller
         $view = new Template();
         echo $view->render('views/edit-book.html');
     }
+
+
+
+    function deleteBook()
+    {
+        if (!Validation::loggedIn($this->_f3)) {
+            $this->_f3->reroute('/login');
+        }
+
+        if ($this->_f3->get('SESSION.person') instanceof Admin){
+            $this->_f3->reroute('/');
+        }
+
+        //If the form has been posted
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $book_id = $GLOBALS['dataLayer']->deleteBook($this->_f3->get('SESSION.book')->getBookId());
+            if(!empty($book_id)){
+                $this->_f3->set('SESSION.alert', 'Your book is deleted successfully.');
+            }
+
+            $this->_f3->reroute('/');
+
+        }
+
+        if(!isset($_GET['id'])){
+            //Redirect to the default route
+            $this->_f3->reroute('/');
+        }
+
+        $book_id = $_GET['id'];
+        $book = $GLOBALS['dataLayer']->getBook($book_id);
+        $this->_f3->set('SESSION.book', $book);
+
+        // If person is not the owner reroute to home
+        if ($this->_f3->get('SESSION.person')->getPersonId() != $book->getOwner()){
+            $this->_f3->reroute('/');
+        }
+
+        // Set the title of the page
+        $this->_f3->set('title', "Edit: " . $book->getTitle());
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/delete-book.html');
+    }
 }

@@ -44,7 +44,7 @@ Date: 5/26/2023
                 <a href="book?id={{ @book->getBookId() }}" class="btn btn-primary dark-blue-bg">More Details</a>
               </div>
               <div class="col-3">
-                <img src="{{ @book->getPhotoPath() }}" class="img-fluid" alt="{{ @SESSION.book->getPhotoName() }}">
+                <img src="{{ @book->getPhotoPath() }}" class="img-fluid" alt="{{ @book->getPhotoName() }}">
               </div>
             </div>
           </div>

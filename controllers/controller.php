@@ -15,7 +15,10 @@ class Controller
     //F3 object
     private $_f3;
 
-
+    /**
+     * Controller parameterized constructor
+     * @param $f3
+     */
     function __construct($f3)
     {
         $this->_f3 = $f3;
@@ -595,9 +598,9 @@ class Controller
 
     function searchResults()
     {
+
         //If the form has been posted
         if($_SERVER['REQUEST_METHOD'] == "POST"){
-
             // Get the data
             $search = (isset($_POST['search'])) ? $_POST['search'] : '';
 
@@ -611,7 +614,6 @@ class Controller
 
         // Set the title of the page
         $this->_f3->set('title', "Search Results");
-
 
         // Define a view page
         $view = new Template();

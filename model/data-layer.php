@@ -37,7 +37,7 @@ class DataLayer
 
 
     /**
-     * insertPerson insert a new person from the secondhand-books app
+     * Inserts a new person from the secondhand-books app
      * @param Person A Person object
      * @return person_id of the new person object
      */
@@ -79,7 +79,7 @@ class DataLayer
 
 
     /**
-     * updatePerson update a person from the secondhand-books app
+     * Updates a person from the secondhand-books app
      * @param Person A Person object
      * @return person_id of the new person object
      */
@@ -154,8 +154,8 @@ class DataLayer
     }
 
     /**
-     * This function active a person by uuid that
-     * has sent to the user's email
+     * This function sets a person uuid active when a confirmation
+     * was sent to the user's email and has been confirmed
      * @param $uuid
      * @return true if updated successfully
      */
@@ -217,7 +217,7 @@ class DataLayer
     }
 
     /**
-     * insertBook insert a new book object
+     * Inserts a new book object
      * for the secondhand-books app
      * @param Book An Book object
      * @return book_id of the new book object
@@ -266,7 +266,7 @@ class DataLayer
 
 
     /**
-     * updateBook update a book
+     * Updates a book
      * for the secondhand-books app
      * @param Book An Book object
      * @return book_id of the book object
@@ -346,6 +346,13 @@ class DataLayer
         return $book;
     }
 
+    /**
+     * This function returns an array of books
+     * based on a keyword
+     * @param $search_phrase keyword
+     * @return array the books that match the
+     * keyword in somewhere in one of its fields
+     */
     function search($search_phrase){
 
         // SELECT Statement - multiple rows
@@ -384,6 +391,9 @@ class DataLayer
 
     }
 
+    /** Returns all books that are not yet approved
+     * @return array Book objects
+     */
     function getUnapprovedBooks(){
         // SELECT Statement - multiple rows
         // 1. define the query
@@ -413,6 +423,12 @@ class DataLayer
         return $books;
     }
 
+    /**
+     * Updates the database to change the
+     * approved status of a book to true
+     * @param $book_id matching the book ID in the database
+     * @return true
+     */
     function approveBook($book_id)
     {
 
@@ -430,6 +446,12 @@ class DataLayer
 
         return true;
     }
+
+    /**
+     * Returns all books in the database and
+     * orders them by book ID
+     * @return array of Book objects
+     */
     function getBooks()
     {
         // 1. define the query
@@ -464,6 +486,11 @@ class DataLayer
         return $books;
     }
 
+    /**
+     * Returns all books that are assigned to a specific owner
+     * @param $personId matches an ID of an owner in database
+     * @return array of books
+     */
     function getBooksByOwner($personId)
     {
         // 1. define the query
@@ -501,11 +528,23 @@ class DataLayer
         return $books;
     }
 
+    /**
+     * Returns a string array that holds the selections
+     * available for a user to select
+     * @return string[]
+     */
     static function getSortingChoices()
     {
         return array("title", "authors", "subject", "price");
     }
 
+    /**
+     * Returns all books in that database that have been
+     * approved and orders them based on sorting choices
+     * selected by the user
+     * @param $sortType choices that have been pre-determined
+     * @return array of books
+     */
     function sortBy($sortType)
     {
         // 1. Define the query
@@ -539,6 +578,12 @@ class DataLayer
         return $books;
     }
 
+    /**
+     * This function deletes a book in the database
+     * based on the passed in book_id
+     * @param $book_id matched the book ID in the database
+     * @return mixed the book_id of the deleted book
+     */
     function deleteBook($book_id)
     {
         // 1. define the query
@@ -557,7 +602,11 @@ class DataLayer
         return $book_id;
     }
 
-
+    /**
+     * Returns an email based on the owner_id
+     * @param $owner_id matched the owner ID in the database
+     * @return mixed email assigned to a person based on owner_id
+     */
     function getOwnerEmail($owner_id)
     {
         // 1. define the query
@@ -580,7 +629,11 @@ class DataLayer
         return $row['email'];
     }
 
-
+    /**
+     * This function resets the time the password will expire
+     * @param $email matches email in the database
+     * @return mixed Uuid based on email
+     */
     function passwordResetLink($email)
     {
         $currentDateTime = date("Y-m-d H:i:s");
@@ -619,9 +672,11 @@ class DataLayer
         return $row['uuid'];
     }
 
-
-
-
+    /**
+     * This function checks to see if the user's password is expired.
+     * @param $uuid matched the Uuid in the database
+     * @return bool if password has expired or not
+     */
     function checkUuidExpirationTime($uuid)
     {
         // 1. define the query
@@ -649,7 +704,13 @@ class DataLayer
         }
     }
 
-
+    /**
+     * This function sets the password for the user
+     * to what they provide
+     * @param $uuid matches the uuid in the database
+     * @param $password the new password
+     * @return true when the password is successfully changed
+     */
     function updatePassword($uuid, $password){
 
         // 1. define the query

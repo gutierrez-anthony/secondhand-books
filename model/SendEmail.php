@@ -54,6 +54,7 @@ class SendEmail
 
 
     /**
+     * This function sends a link to the user to confirm their email
      * @param $to destenation address
      * @param $from sender email
      * @param $uuid uuid
@@ -140,6 +141,7 @@ class SendEmail
 
 
     /**
+     * Sends an email to the user allowing them to reset their password
      * @param $to destenation address
      * @param $from sender email
      * @param $uuid uuid

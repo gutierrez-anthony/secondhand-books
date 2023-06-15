@@ -43,6 +43,7 @@ class Person
     }
 
     /**
+     * Returns the ID of a Person object.
      * @return mixed
      */
     public function getPersonId()
@@ -50,9 +51,8 @@ class Person
         return $this->_person_id;
     }
 
-
-
     /**
+     * Assigns the ID of a Person object with the parameter.
      * @param String $person_id
      */
     public function setPersonId($person_id)
@@ -60,9 +60,8 @@ class Person
         $this->_person_id = $person_id;
     }
 
-
-
     /**
+     * Returns the first name of a Person object.
      * @return String
      */
     public function getFname()
@@ -71,6 +70,7 @@ class Person
     }
 
     /**
+     * Assigns the first name of a Person object with the parameter.
      * @param String $fname
      */
     public function setFname($fname)
@@ -79,6 +79,7 @@ class Person
     }
 
     /**
+     * Returns the last name of a Person object.
      * @return String
      */
     public function getLname()
@@ -87,6 +88,7 @@ class Person
     }
 
     /**
+     * Assigns the last name of a Person object with the parameter.
      * @param String $lname
      */
     public function setLname($lname)
@@ -95,6 +97,7 @@ class Person
     }
 
     /**
+     * Returns the email of a Person object.
      * @return String
      */
     public function getEmail()
@@ -103,6 +106,7 @@ class Person
     }
 
     /**
+     * Assigns the email of a Person object with the parameter.
      * @param String $email
      */
     public function setEmail($email)
@@ -111,6 +115,7 @@ class Person
     }
 
     /**
+     * Returns the address of a Person object.
      * @return String
      */
     public function getAddress()
@@ -119,6 +124,7 @@ class Person
     }
 
     /**
+     * Assigns the address of a Person object with the parameter.
      * @param String $address
      */
     public function setAddress($address)
@@ -127,6 +133,7 @@ class Person
     }
 
     /**
+     * Returns the phone number of a Person object.
      * @return String
      */
     public function getPhone()
@@ -135,6 +142,7 @@ class Person
     }
 
     /**
+     * Assigns the phone number of a Person object with the parameter.
      * @param String $phone
      */
     public function setPhone($phone)
@@ -143,6 +151,7 @@ class Person
     }
 
     /**
+     * Returns the password of a Person object.
      * @return String
      */
     public function getPassword()
@@ -151,6 +160,7 @@ class Person
     }
 
     /**
+     * Assigns the password of a Person object with the parameter.
      * @param String $password
      */
     public function setPassword($password)
@@ -159,6 +169,7 @@ class Person
     }
 
     /**
+     * Returns true if a Person object is an Admin.
      * @return Boolean
      */
     public function getIsAdmin()
@@ -167,6 +178,7 @@ class Person
     }
 
     /**
+     * Returns true if a Person object's email has been verified.
      * @return Boolean
      */
     public function getIsActive()
@@ -175,6 +187,7 @@ class Person
     }
 
     /**
+     * Assigns true or false to a Person object with the parameter.
      * @param Boolean $isadmin
      */
     public function setIsAdmin($isadmin)
@@ -183,14 +196,16 @@ class Person
     }
 
     /**
-     * @param Boolean $isadmin
+     * Assigns true or false to a Person object with the parameter.
+     * @param Boolean $isActive
      */
-    public function setIsActive($isctive)
+    public function setIsActive($isActive)
     {
-        $this->_is_active = $isctive;
+        $this->_is_active = $isActive;
     }
 
     /**
+     * Returns the UU ID of a Person object.
      * @return String
      */
     public function getUuid()
@@ -199,6 +214,7 @@ class Person
     }
 
     /**
+     * Assigns the UU ID of a Person object with the parameter.
      * @param String $uuid
      */
     public function setUuid($uuid)
@@ -207,6 +223,7 @@ class Person
     }
 
     /**
+     * Returns the datetime for the password of a Person object.
      * @return DateTime
      */
     public function getPasswordTimestamp()
@@ -215,6 +232,7 @@ class Person
     }
 
     /**
+     * Assigns the datetime for the password of a Person object with the parameter.
      * @param DateTime $passwordtimestamp
      */
     public function setPasswordTimestamp($passwordtimestamp)

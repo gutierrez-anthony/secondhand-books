@@ -173,7 +173,7 @@ class Validation
 
     /**
      * Check the add book fields not being
-     * empty ro less than five character
+     * empty or less than five character
      */
     static function validateBookField($fieldValue)
     {
@@ -195,7 +195,9 @@ class Validation
         return true;
     }
 
-
+    /**
+     * Checks if the book ID belong to books that have been approved
+     */
     static function validBookIds($f3, $book_ids)
     {
         $valid_ids = array();
@@ -215,6 +217,9 @@ class Validation
         return true;
     }
 
+    /**
+     * Checks if the sort by choice is a valid selection
+     */
     static function validateSorting($selectedChoices)
     {
         return (in_array($selectedChoices, DataLayer::getSortingChoices()));

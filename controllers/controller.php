@@ -782,4 +782,101 @@ class Controller
         $view = new Template();
         echo $view->render('views/delete-book.html');
     }
+
+
+    function forgotPassword()
+    {
+        //If the form has been posted
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            // Get the data
+            $email = (isset($_POST['email'])) ? $_POST['email'] : '';
+
+            // *** If email is not valid, set an error variable
+            if (!Validation::validEmail($email)) {
+                $this->_f3->set('errors["email"]', 'Invalid email entered');
+            }
+
+
+            // Redirect to home route if there
+            // are no errors (errors array is empty)
+            if (empty($this->_f3->get('errors'))) {
+
+                $uuid = $GLOBALS['dataLayer']->passwordResetLink($email);
+                $send_email = SendEmail::sendPasswordResetLink($email, $this->_f3->get('OUR_EMAIL'), $uuid, $this->_f3);
+                if($send_email){
+                    $this->_f3->set('SESSION.alert', 'Check your email for password reset link.');
+                }
+
+                $this->_f3->reroute('/');
+            }
+
+        }
+
+        // Set the title of the page
+        $this->_f3->set('title', 'Forgot Password');
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/forgot-password.html');
+    }
+
+
+    function resetPassword()
+    {
+        //If the form has been posted
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            // Get data
+            $password = (isset($_POST['password'])) ? $_POST['password'] : '';
+            $confirm_password = (isset($_POST['confirmPassword'])) ? $_POST['confirmPassword'] : '';
+
+            // *** If password is not valid, set an error variable
+            if (!Validation::validatePassword($password)) {
+                $this->_f3->set('errors["password"]', 'Password length should be between 8 and 20 characters and 
+                contains at least one uppercase letter, one lowercase letter, one digit, and one special character');
+            }
+
+            // *** If confirm_password is not valid, set an error variable
+            if (!Validation::validateConfirmPassword($password, $confirm_password)) {
+                $this->_f3->set('errors["confirm_password"]', 'The passwords must match');
+            }
+
+            // Redirect to home route if there
+            // are no errors (errors array is empty)
+            if (empty($this->_f3->get('errors'))) {
+
+                $GLOBALS['dataLayer']->updatePassword($_POST['uuid'], $password);
+
+                $this->_f3->set('SESSION.alert', 'Your password is updated successfully.');
+
+
+                $this->_f3->reroute('/');
+            }
+
+        }
+
+        if(!isset($_GET['uuid'])){
+            //Redirect to the default route
+            $this->_f3->reroute('/');
+        }
+
+        $uuid = $_GET['uuid'];
+        $result = $GLOBALS['dataLayer']->checkUuidExpirationTime($uuid);
+
+        if(!$result){
+            $this->_f3->set('expired', 'Your password reset link is expired.');
+        } else {
+            $this->_f3->set('uuid', $uuid);
+        }
+
+        // Set the title of the page
+        $this->_f3->set('title', 'Reset Password');
+
+
+        // Define a view page
+        $view = new Template();
+        echo $view->render('views/reset-password.html');
+    }
 }

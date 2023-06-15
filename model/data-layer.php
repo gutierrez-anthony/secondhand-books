@@ -581,4 +581,97 @@ class DataLayer
     }
 
 
+    function passwordResetLink($email)
+    {
+        $currentDateTime = date("Y-m-d H:i:s");
+        $futureDateTime = date("Y-m-d H:i:s", strtotime($currentDateTime . "+15 minutes"));
+
+        // 1. define the query
+        $sql = "UPDATE Person SET uuid = uuid(), password_timestamp = :time WHERE email = :email";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. bind the parameters
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':time', $futureDateTime);
+
+        //4. Execute
+        $statement->execute();
+
+
+        // 1. define the query
+        $sql2 = "SELECT uuid FROM Person WHERE email = :email";
+
+        // 2. prepare the statement
+        $statement2 = $this->_dbh->prepare($sql2);
+
+        //3. bind the parameters
+        $statement2->bindParam(':email', $email);
+
+        //4. Execute
+        $statement2->execute();
+
+        // 5. Process the result
+        $row = $statement2->fetch(PDO::FETCH_ASSOC);
+
+
+        return $row['uuid'];
+    }
+
+
+
+
+    function checkUuidExpirationTime($uuid)
+    {
+        // 1. define the query
+        $sql = "SELECT password_timestamp FROM Person WHERE uuid = :uuid";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. bind the parameters
+        $statement->bindParam(':uuid', $uuid);
+
+        //4. Execute
+        $statement->execute();
+
+        // 5. Process the result
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $password_timestamp = $row['password_timestamp'];
+        $currentDateTime = date("Y-m-d H:i:s");
+
+        if ($password_timestamp >= $currentDateTime){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    function updatePassword($uuid, $password){
+
+        // 1. define the query
+        $sql = "UPDATE Person SET password = :password WHERE uuid = :uuid";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // Hash the password
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        //3. bind the parameters
+        $statement->bindParam(':password', $password);
+        $statement->bindParam(':uuid', $uuid);
+
+        //4. Execute
+        $statement->execute();
+
+        return true;
+    }
+
+
+
+
 }

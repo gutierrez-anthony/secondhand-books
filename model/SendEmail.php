@@ -137,4 +137,49 @@ class SendEmail
 
         return true;
     }
+
+
+    /**
+     * @param $to destenation address
+     * @param $from sender email
+     * @param $uuid uuid
+     * @param $f3 fat free instance
+     * @return true if email has sent
+     */
+    static function sendPasswordResetLink($to, $from, $uuid, $f3)
+    {
+        $baseDomain = $f3->get('BASE');
+        $approve_link = 'https://' . $_SERVER['HTTP_HOST'] . $baseDomain . '/reset-password?uuid=' .  $uuid;
+
+
+        // Send as an email
+        $subject = "Password reset link" ;
+
+        $message = "
+        <html>
+        <head>
+        <title>Password reset link</title>
+        </head>
+        <body>
+        <p>You have requested the password reset link.</p>
+
+        <br>
+        <br>
+        <p>To reset your password click on the link below:</p>
+        <p><a href='" . $approve_link . "'>" . $approve_link . "</a></p>
+        </body>
+        </html>";
+
+        // Always set content-type when sending HTML email
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+        // More headers
+        $headers .= 'From: <' . $from . '>' . "\r\n";
+
+
+        mail($to,$subject,$message,$headers);
+
+        return true;
+    }
 }

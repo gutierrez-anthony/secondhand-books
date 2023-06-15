@@ -186,7 +186,7 @@ class Validation
         }
 
         // Check if the string length is less than 5
-        if (strlen($trimmedValue) < 5) {
+        if (strlen($trimmedValue) < 1) {
             return false;
         }
 

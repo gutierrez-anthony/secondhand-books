@@ -121,7 +121,7 @@ $f3->route('GET /book', function() {
 
 
 // Define an edit book route
-$f3->route('GET /edit-book', function() {
+$f3->route('GET|POST /edit-book', function() {
     $GLOBALS['con']->editBook();
 });
 

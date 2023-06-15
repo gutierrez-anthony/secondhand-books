@@ -266,6 +266,55 @@ class DataLayer
 
 
     /**
+     * updateBook update a book
+     * for the secondhand-books app
+     * @param Book An Book object
+     * @return book_id of the book object
+     */
+    function updateBook($book)
+    {
+        //PDO - Using Prepared Statements
+        //1. Define the query (test first!)
+        $sql = "UPDATE Book SET
+            title = :title,
+            authors = :authors,
+            edition = :edition,
+            description = :description,
+            subject = :subject,
+            price = :price
+        WHERE book_id = :book_id";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $title = $book->getTitle();
+        $authors = $book->getAuthors();
+        $edition = $book->getEdition();
+        $description = $book->getDescription();
+        $subject = $book->getSubject();
+        $book_id = $book->getBookId();
+        $price = $book->getPrice();
+
+
+        $statement->bindParam(':title', $title);
+        $statement->bindParam(':authors', $authors);
+        $statement->bindParam(':edition', $edition);
+        $statement->bindParam(':description', $description);
+        $statement->bindParam(':subject', $subject);
+        $statement->bindParam(':book_id', $book_id);
+        $statement->bindParam(':price', $price);
+
+
+
+        //4. Execute
+        $statement->execute();
+
+
+        return $book_id;
+    }
+
+    /**
      * This function returns a book
      * based on book_id
      * @param $book_id
@@ -292,6 +341,8 @@ class DataLayer
         $book = new Book($row['title'], $row['owner'], $row['authors'],
             $row['price'], $row['photoPath'], $row['photo_name'], $row['description'], $row['subject'], $row['edition']);
         $book->setIsApproved($row['isApproved']);
+        $book->setBookId($row['book_id']);
+
         return $book;
     }
 

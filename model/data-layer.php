@@ -491,6 +491,7 @@ class DataLayer
                 $row['subject'],
                 $row['edition']);
             $book->setBookId($row['book_id']);
+            $book->setIsApproved($row['isApproved']);
             $books[] = $book;
         }
 

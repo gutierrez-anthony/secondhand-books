@@ -37,7 +37,7 @@ Date: 5/26/2023
               <h5 class="card-title">{{ @book->getTitle() }}</h5>
               <p class="card-text">Author: {{ @book->getAuthors() }}
                 <br>
-                Edition: {{ @book->getEdition() }}
+                Price: ${{ @book->getPrice() }}
               </p>
               <a href="book?id={{ @book->getBookId() }}" class="btn btn-primary dark-blue-bg">More Details</a>
             </div>

@@ -40,11 +40,11 @@ Date: 5/26/2023
               <div class="col-9">
                 <p class="card-text"><b>Authors:</b> {{ @book->getAuthors() }}</p>
                 <p class="card-text"><b>Edition:</b> {{ @book->getEdition() }}</p>
-                <p class="card-text"><b>Price:</b> {{ @book->getPrice() }}</p>
+                <p class="card-text"><b>Price:</b> ${{ @book->getPrice() }}</p>
                 <a href="book?id={{ @book->getBookId() }}" class="btn btn-primary dark-blue-bg">More Details</a>
               </div>
               <div class="col-3">
-                <img src="{{ @book->getPhotoPath() }}" class="img-fluid" alt="{{ @book->getPhotoName() }}">
+                <img src="{{ @book->getPhotoPath() }}" class="img-fluid" alt="{{ @SESSION.book->getPhotoName() }}">
               </div>
             </div>
           </div>

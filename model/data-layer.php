@@ -467,10 +467,13 @@ class DataLayer
     function getBooksByOwner($personId)
     {
         // 1. define the query
-        $sql = "SELECT * FROM Book WHERE owner = " . $personId;
+        $sql = "SELECT * FROM Book WHERE owner = :owner";
 
         // 2. prepare the statement
         $statement = $this->_dbh->prepare($sql);
+
+        //3. bind the parameters
+        $statement->bindParam(':owner', $personId);
 
         //4. Execute
         $statement->execute();
@@ -500,8 +503,7 @@ class DataLayer
 
     static function getSortingChoices()
     {
-        $choices = array("title", "authors", "subject", "price");
-        return $choices;
+        return array("title", "authors", "subject", "price");
     }
 
     function sortBy($sortType)
@@ -553,6 +555,29 @@ class DataLayer
 
 
         return $book_id;
+    }
+
+
+    function getOwnerEmail($owner_id)
+    {
+        // 1. define the query
+        $sql = "SELECT email FROM Person WHERE person_id = :owner_id";
+
+        // 2. prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. bind the parameters
+        $statement->bindParam(':owner_id', $owner_id);
+
+        //4. Execute
+        $statement->execute();
+
+        // 5. Process the result
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+
+
+        return $row['email'];
     }
 
 

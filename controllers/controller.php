@@ -247,10 +247,62 @@ class Controller
 
     function contactOwner()
     {
-        if (!Validation::loggedIn($this->_f3)) {
-            $this->_f3->reroute('/login');
+
+        //If the form has been posted
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            // Get the data
+            $name = (isset($_POST['name'])) ? $_POST['name'] : '';
+            $sender_email = (isset($_POST['email'])) ? $_POST['email'] : '';
+            $subject = (isset($_POST['subject'])) ? $_POST['subject'] : '';
+            $message = (isset($_POST['message'])) ? $_POST['message'] : '';
+
+            // *** If subject is not valid, set an error variable
+            if (!Validation::validateEmailSubject($subject)) {
+                $this->_f3->set('errors["subject"]', 'Invalid subject entered');
+            }
+
+            // *** If message is not valid, set an error variable
+            if (!Validation::validateMessage($message)) {
+                $this->_f3->set('errors["message"]', 'Invalid message entered');
+            }
+
+            // *** If email is not valid, set an error variable
+            if (!Validation::validEmail($sender_email)) {
+                $this->_f3->set('errors["email"]', 'Invalid email entered');
+            }
+
+            // *** If name is not valid, set an error variable
+            if (!Validation::validName($name)) {
+                $this->_f3->set('errors["name"]', 'Invalid name entered');
+            }
+
+
+
+            // Redirect to home route if there
+            // are no errors (errors array is empty)
+            if (empty($this->_f3->get('errors'))) {
+                $owner_id = $this->_f3->get('SESSION.book')->getOwner();
+                $owner_email = $GLOBALS['dataLayer']->getOwnerEmail($owner_id);
+
+                // Send email to the book owner
+                $send_email = SendEmail::sendToOwner($owner_email, $sender_email, $subject, $message, $name);
+
+                if($send_email){
+                    $this->_f3->set('SESSION.alert', 'Your email is sent successfully.');
+                }
+
+                $this->_f3->reroute('/');
+            }
+
+
         }
 
+
+        // Get book data
+        $book_id = $_GET['id'];
+        $book = $GLOBALS['dataLayer']->getBook($book_id);
+        $this->_f3->set('SESSION.book', $book);
 
         // Set the title of the page
         $this->_f3->set('title', "Contact Owner");

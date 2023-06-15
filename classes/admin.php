@@ -16,8 +16,8 @@ class Admin extends Person
     private $_books_to_approve;
 
     /**
-     * Returns an array of books that are waiting to be approved.
-     * @return Array
+     * * Returns the array of books to be approved.
+     * @return Array The array of books to be approved.
      */
     public function getBooksToApprove()
     {
@@ -25,13 +25,11 @@ class Admin extends Person
     }
 
     /**
-     * Assigns an array of books objects with the parameter.
-     * @param Array $books_to_approve
+     * Sets the array of books to be approved.
+     * @param Array $books_to_approve The array of books to be approved.
      */
     public function setBooksToApprove($books_to_approve)
     {
         $this->_books_to_approve = $books_to_approve;
     }
-
-
 }

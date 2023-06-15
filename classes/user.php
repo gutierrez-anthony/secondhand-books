@@ -15,8 +15,8 @@ class User extends Person
     private $_books;
 
     /**
-     * Returns an array of Book objects.
-     * @return Array
+     * Returns the books associated with the user.
+     * @return array The books associated with the user.
      */
     public function getBooks()
     {
@@ -24,13 +24,11 @@ class User extends Person
     }
 
     /**
-     * Assigns an array of Book objects with the parameter.
-     * @param Array $books
+     * Sets the books associated with the user.
+     * @param array $books The books associated with the user.
      */
     public function setBooks($books)
     {
         $this->_books = $books;
     }
-
-
 }

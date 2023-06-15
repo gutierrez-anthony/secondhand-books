@@ -26,15 +26,17 @@ class Book
     private $_edition;
 
     /**
-     * Constructs a new Book object and assigns the parameters to its respective fields.
-     * @param $title
-     * @param $owner
-     * @param $authors
-     * @param $description
-     * @param $subject
-     * @param $photo_path
-     * @param $photo_name
-     * @param $price
+     * Constructor for the Book class.
+     *
+     * @param mixed $title The title of the book.
+     * @param mixed $owner The owner of the book.
+     * @param mixed $authors The authors of the book.
+     * @param mixed $price The price of the book.
+     * @param mixed $photo_path (optional) The photo path of the book.
+     * @param mixed $photo_name (optional) The photo name of the book.
+     * @param mixed $description (optional) The description of the book.
+     * @param mixed $subject (optional) The subject of the book.
+     * @param mixed $edition (optional) The edition of the book.
      */
     public function __construct($title, $owner, $authors, $price, $photo_path = '', $photo_name = '', $description = '', $subject = '', $edition = '')
     {
@@ -50,8 +52,8 @@ class Book
     }
 
     /**
-     * Returns the edition of a Book object.
-     * @return mixed
+     * Returns the edition of the book.
+     * @return mixed The edition of the book.
      */
     public function getEdition()
     {
@@ -59,8 +61,17 @@ class Book
     }
 
     /**
-     * Assigns the edition of a book object with the parameter.
-     * @param mixed $edition
+     * Sets the book ID.
+     * @param mixed $book_id The book ID.
+     */
+    public function setBookId($book_id)
+    {
+        $this->_book_id = $book_id;
+    }
+
+    /**
+     * Sets the edition of the book.
+     * @param mixed $edition The edition of the book.
      */
     public function setEdition($edition)
     {
@@ -68,27 +79,18 @@ class Book
     }
 
     /**
-     * Returns the book ID of a Book object.
-     * @return mixed
+     * Returns the book ID.
+     * @return mixed The book ID.
      */
     public function getBookId()
     {
         return $this->_book_id;
     }
 
-    /**
-     * Assigns the ID of a book object with the parameter.
-     * @param mixed $book_id
-     */
-    public function setBookId($book_id)
-    {
-        $this->_book_id = $book_id;
-    }
-
 
     /**
-     * Returns the title of a Book object.
-     * @return mixed
+     * Returns the title of the book.
+     * @return mixed The title of the book.
      */
     public function getTitle()
     {
@@ -96,8 +98,8 @@ class Book
     }
 
     /**
-     * Assigns the title of a book object with the parameter.
-     * @param mixed $title
+     * Sets the title of the book.
+     * @param mixed $title The title of the book.
      */
     public function setTitle($title)
     {
@@ -105,8 +107,8 @@ class Book
     }
 
     /**
-     * Returns the owner of a Book object.
-     * @return mixed
+     * Returns the owner of the book.
+     * @return mixed The owner of the book.
      */
     public function getOwner()
     {
@@ -114,8 +116,8 @@ class Book
     }
 
     /**
-     * Assigns the owner of a book object with the parameter.
-     * @param mixed $owner
+     * Sets the owner of the book.
+     * @param mixed $owner The owner of the book.
      */
     public function setOwner($owner)
     {
@@ -123,8 +125,8 @@ class Book
     }
 
     /**
-     * Returns the author of a Book object.
-     * @return mixed
+     * Returns the authors of the book.
+     * @return mixed The authors of the book.
      */
     public function getAuthors()
     {
@@ -132,8 +134,8 @@ class Book
     }
 
     /**
-     * Assigns the author of a book object with the parameter.
-     * @param mixed $authors
+     * Sets the authors of the book.
+     * @param mixed $authors The authors of the book.
      */
     public function setAuthors($authors)
     {
@@ -141,8 +143,8 @@ class Book
     }
 
     /**
-     * Returns the description of a Book object.
-     * @return mixed|string
+     * Returns the description of the book.
+     * @return mixed|string The description of the book.
      */
     public function getDescription()
     {
@@ -150,8 +152,8 @@ class Book
     }
 
     /**
-     * Assigns the description of a book object with the parameter.
-     * @param mixed|string $description
+     * Sets the description of the book.
+     * @param mixed|string $description The description of the book.
      */
     public function setDescription($description)
     {
@@ -159,8 +161,8 @@ class Book
     }
 
     /**
-     * Returns the subject of a Book object.
-     * @return mixed|string
+     * Returns the subject of the book.
+     * @return mixed|string The subject of the book.
      */
     public function getSubject()
     {
@@ -168,8 +170,8 @@ class Book
     }
 
     /**
-     * Assigns the subject of a book object with the parameter.
-     * @param mixed|string $subject
+     * Sets the subject of the book.
+     * @param mixed $subject The subject of the book.
      */
     public function setSubject($subject)
     {
@@ -177,8 +179,8 @@ class Book
     }
 
     /**
-     * Returns the file path of the phone of a Book object.
-     * @return mixed|string
+     * Returns the photo path of the book.
+     * @return mixed|string The photo path of the book.
      */
     public function getPhotoPath()
     {
@@ -186,8 +188,8 @@ class Book
     }
 
     /**
-     * Assigns the file path of the photo of a book object with the parameter.
-     * @param mixed|string $photo_path
+     * Sets the photo path of the book.
+     * @param mixed|string $photo_path The photo path of the book.
      */
     public function setPhotoPath($photo_path)
     {
@@ -195,8 +197,8 @@ class Book
     }
 
     /**
-     * Returns the file name for a photo of a Book object.
-     * @return mixed|string
+     * Returns the photo name of the book.
+     * @return mixed|string The photo name of the book.
      */
     public function getPhotoName()
     {
@@ -204,8 +206,8 @@ class Book
     }
 
     /**
-     * Assigns the file name for a photo of a book object with the parameter.
-     * @param mixed|string $photo_name
+     * Sets the photo name of the book.
+     * @param mixed|string $photo_name The photo name of the book.
      */
     public function setPhotoName($photo_name)
     {
@@ -213,8 +215,8 @@ class Book
     }
 
     /**
-     * Returns the price of a Book object.
-     * @return mixed
+     * Returns the price of the book.
+     * @return mixed The price of the book.
      */
     public function getPrice()
     {
@@ -222,8 +224,8 @@ class Book
     }
 
     /**
-     * Assigns the price of a book object with the parameter.
-     * @param mixed $price
+     * Sets the price of the book.
+     * @param mixed $price The price of the book.
      */
     public function setPrice($price)
     {
@@ -231,8 +233,8 @@ class Book
     }
 
     /**
-     * Returns true if the Book object is approved.
-     * @return mixed
+     * Returns the approval status of the book.
+     * @return mixed The approval status of the book.
      */
     public function getIsApproved()
     {
@@ -240,8 +242,8 @@ class Book
     }
 
     /**
-     * Assigns true or false to a book object with the parameter.
-     * @param mixed $is_approved
+     * Sets the approval status of the book.
+     * @param mixed $is_approved The approval status of the book.
      */
     public function setIsApproved($is_approved)
     {
@@ -249,17 +251,11 @@ class Book
     }
 
     /**
-     * Returns the datetime group the Book object was posted into the database.
-     * @return mixed
+     * Returns the post time of the book.
+     * @return mixed The post time of the book.
      */
     public function getPostTime()
     {
         return $this->_post_time;
     }
-
-
-
-
-
-
 }

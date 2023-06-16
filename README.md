@@ -8,7 +8,7 @@ top to allow users and visitors to search for a specific book.
 
 ## Authors
 - **Anthony Gutierrez** - Co-Founder/Developer 
-- **Mehdi Jokar** - Co-Founder/Developer
+- **[Mehdi Jokar](https://github.com/jowkarm)** - Co-Founder/Developer
 
 > 
 

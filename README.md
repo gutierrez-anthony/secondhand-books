@@ -35,7 +35,7 @@ top to allow users and visitors to search for a specific book.
 :heavy_check_mark: 10. The project has undergone comprehensive testing, resulting in a bug-free application where all pages function as intended, providing users with a seamless experience.
 
 ## UML Class Diagram
-![secondHandBooks](https://github.com/gutierrez-anthony/secondhand-books/assets/80451342/0d1e2e2d-bb05-40be-becc-34650872fea7)
+![UML](https://github.com/gutierrez-anthony/secondhand-books/assets/80451342/9c6e0631-432b-48d8-81c9-5ea96ebd802b)
 
 
 ## ER Database Diagram

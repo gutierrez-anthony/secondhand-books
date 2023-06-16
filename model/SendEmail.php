@@ -15,7 +15,7 @@ class SendEmail
 
 
     /**
-     * This function send an email
+     * This function email us for the contact us page
      * @param $to destenation address
      * @param $from sender email
      * @param $subject subject of the email
@@ -54,7 +54,8 @@ class SendEmail
 
 
     /**
-     * This function sends a link to the user to confirm their email
+     * This function email the confirmation link for new users
+     *
      * @param $to destenation address
      * @param $from sender email
      * @param $uuid uuid
@@ -100,7 +101,7 @@ class SendEmail
 
 
     /**
-     * This function send an email
+     * This function email a book owner
      * @param $to destenation address
      * @param $from sender email
      * @param $subject subject of the email
@@ -141,7 +142,8 @@ class SendEmail
 
 
     /**
-     * Sends an email to the user allowing them to reset their password
+     * This function email the password reset link.
+     *
      * @param $to destenation address
      * @param $from sender email
      * @param $uuid uuid

@@ -138,12 +138,12 @@ $f3->route('GET /logout', function() {
 });
 
 // Define a forgot-password route
-$f3->route('GET|POST /forgot-password ', function() {
+$f3->route('GET|POST /forgot-password', function() {
     $GLOBALS['con']->forgotPassword();
 });
 
 // Define a reset-password route
-$f3->route('GET|POST /reset-password ', function() {
+$f3->route('GET|POST /reset-password', function() {
     $GLOBALS['con']->resetPassword();
 });
 

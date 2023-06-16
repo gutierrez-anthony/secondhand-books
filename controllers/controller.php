@@ -15,15 +15,24 @@ class Controller
     //F3 object
     private $_f3;
 
+
     /**
-     * Controller parameterized constructor
-     * @param $f3
+     * Constructor for the class.
+     * @param Object $f3 The Fat-Free Framework object.
      */
     function __construct($f3)
     {
         $this->_f3 = $f3;
     }
 
+
+    /**
+     * The home page controller.
+     *
+     * This method sets the title of the page, retrieves an
+     * alert message from the session, retrieves books data from the model,
+     * and renders the home view page.
+     */
     function home()
     {
 
@@ -44,6 +53,13 @@ class Controller
         echo $view->render('views/home.html');
     }
 
+
+    /**
+     * Controller for the about-us route.
+     *
+     * This method sets the title of the
+     * page and renders the about-us view page.
+     */
     function aboutUs()
     {
         // Set the title of the page
@@ -54,6 +70,14 @@ class Controller
         echo $view->render('views/about-us.html');
     }
 
+
+    /**
+     * Controller for the contact-us route.
+     *
+     * This method handles the contact form submission, validates the form data, sends an email,
+     * and redirects to the home route if there are no errors.
+     * It also sets the title of the page and renders the contact-us view page.
+     */
     function contactUs()
     {
 
@@ -119,7 +143,11 @@ class Controller
         echo $view->render('views/terms-of-services.html');
     }
 
-    function faq(){
+    /**
+     * Controller for the faq route
+     */
+    function faq()
+    {
         // Set the title of the page
         $this->_f3->set('title', "FAQ");
 
@@ -129,6 +157,9 @@ class Controller
         echo $view->render('views/faq.html');
     }
 
+    /**
+     * Controller for the register route
+     */
     function register()
     {
 
@@ -205,6 +236,9 @@ class Controller
         echo $view->render('views/register.html');
     }
 
+    /**
+     * Controller for the login route
+     */
     function login()
     {
 
@@ -248,6 +282,9 @@ class Controller
         echo $view->render('views/login.html');
     }
 
+    /**
+     * Controller for the contact-owner route
+     */
     function contactOwner()
     {
 
@@ -315,6 +352,11 @@ class Controller
         $view = new Template();
         echo $view->render('views/contact-owner.html');
     }
+
+
+    /**
+     * Controller for the add-book route
+     */
     function addBook()
     {
         if (!Validation::loggedIn($this->_f3)) {
@@ -414,11 +456,7 @@ class Controller
 
                 $this->_f3->reroute('/');
             }
-
-
         }
-
-
 
         // Set the title of the page
         $this->_f3->set('title', "Add Book");
@@ -429,6 +467,10 @@ class Controller
         echo $view->render('views/add-book.html');
     }
 
+
+    /**
+     * Controller for the profile route
+     */
     function profile()
     {
         if (!Validation::loggedIn($this->_f3)) {
@@ -507,6 +549,10 @@ class Controller
         echo $view->render('views/profile.html');
     }
 
+
+    /**
+     * Controller for the confirm-email route
+     */
     function confirmEmail()
     {
         if(!isset($_GET['uuid'])){
@@ -524,6 +570,10 @@ class Controller
         $this->_f3->reroute('/');
     }
 
+
+    /**
+     * Controller for the admin-dashboard route
+     */
     function adminDashboard()
     {
         if (!Validation::loggedIn($this->_f3)) {
@@ -569,6 +619,10 @@ class Controller
         echo $view->render('views/admin-dashboard.html');
     }
 
+
+    /**
+     * Controller for the lists route
+     */
     function listings()
     {
         if($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -596,11 +650,15 @@ class Controller
         echo $view->render('views/lists.html');
     }
 
+
+    /**
+     * Controller for the search-results route
+     */
     function searchResults()
     {
-
         //If the form has been posted
         if($_SERVER['REQUEST_METHOD'] == "POST"){
+
             // Get the data
             $search = (isset($_POST['search'])) ? $_POST['search'] : '';
 
@@ -615,11 +673,16 @@ class Controller
         // Set the title of the page
         $this->_f3->set('title', "Search Results");
 
+
         // Define a view page
         $view = new Template();
         echo $view->render('views/search-results.html');
     }
 
+
+    /**
+     * Controller for the book route
+     */
     function book()
     {
         if(!isset($_GET['id'])){
@@ -640,6 +703,10 @@ class Controller
         echo $view->render('views/book.html');
     }
 
+
+    /**
+     * Controller for the logout route
+     */
     function logout()
     {
         session_start();
@@ -651,6 +718,10 @@ class Controller
         $this->_f3->reroute('/');
     }
 
+
+    /**
+     * Controller for the edit-book route
+     */
     function editBook()
     {
         if (!Validation::loggedIn($this->_f3)) {
@@ -712,8 +783,6 @@ class Controller
 
                 $this->_f3->reroute('/');
             }
-
-
         }
 
         if(!isset($_GET['id'])){
@@ -740,7 +809,9 @@ class Controller
     }
 
 
-
+    /**
+     * Controller for the delete-book route
+     */
     function deleteBook()
     {
         if (!Validation::loggedIn($this->_f3)) {
@@ -785,7 +856,9 @@ class Controller
         echo $view->render('views/delete-book.html');
     }
 
-
+    /**
+     * Controller for the forgot-password route
+     */
     function forgotPassword()
     {
         //If the form has been posted
@@ -824,7 +897,9 @@ class Controller
         echo $view->render('views/forgot-password.html');
     }
 
-
+    /**
+     * Controller for the reset-password route
+     */
     function resetPassword()
     {
         //If the form has been posted

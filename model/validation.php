@@ -173,7 +173,7 @@ class Validation
 
     /**
      * Check the add book fields not being
-     * empty or less than five character
+     * empty ro less than five character
      */
     static function validateBookField($fieldValue)
     {
@@ -196,7 +196,12 @@ class Validation
     }
 
     /**
-     * Checks if the book ID belong to books that have been approved
+     * This function validate the book IDs
+     * that admin is approved.
+     *
+     * @param $f3 fat free framework object
+     * @param $book_ids
+     * @return bool
      */
     static function validBookIds($f3, $book_ids)
     {
@@ -218,7 +223,11 @@ class Validation
     }
 
     /**
-     * Checks if the sort by choice is a valid selection
+     * This function validates the selected
+     * choice in the listings page
+     *
+     * @param $selectedChoices
+     * @return bool
      */
     static function validateSorting($selectedChoices)
     {

@@ -1,30 +1,51 @@
 # secondhand-books
-
->Authors: Anthony Gutierrez, Mehdi Jokar
-> 
-<p>This web application is designed to allow students to sell their used 
+This web application is designed to allow students to sell their used 
 textbooks easily. There is a sign-up and login function to allow users to 
 add the books they want to sell to the page. The home page contains a 
 highlight of the books that are available. A listing page shows the entire 
 selection of books with a sort function. All pages have a search bar at the 
-top to allow users and visitors to search for a specific book.</p>
+top to allow users and visitors to search for a specific book.
 
-Project Requirements:
-1. The Model, Views, and Controller are separated into their respective 
-   folders with data manipulation being in the model folder, html pages and any 
-   html code in the views folder, and url routing in the controller folder.
-2. index.php utilizes Fat-Free for url routing and implements the 
-   Fat-Free framework.
-3. Datalayer class within datalayer.php in the model folder utilizes PDO and 
-   prepared statements to run SQL code.
-4. Users are allowed to add books to the database. Once the book has been 
-   approved by the admin, the book is visible on the web pages.
-5. Commits and comments are available in the Git repository.
-6. All class objects are located in the classes folder, which include Book, 
-   Person, User, and Admin. User and Admin are children to the Person class.
-7. All PHP files contain Docblocs and follow PEAR standards.
-8. All validation is done using validation methods server-side.
-9. All code is clear with comments to explain its purpose.
-10. Currently, no bugs exist and all pages work as intended.
+## Authors
+- **Anthony Gutierrez** - Co-Founder/Developer 
+- **Mehdi Jokar** - Co-Founder/Developer
 
-![image](https://github.com/gutierrez-anthony/secondhand-books/assets/96748932/e38910a7-5c33-4d2a-bb60-edc9756ee2b3)
+> 
+
+
+## Project Requirements
+:heavy_check_mark: 1. The project adheres to a well-organized structure, with clear separation of the Model, Views, and Controller components into their respective directory. Data manipulation functions are placed in the model directory, HTML pages and related code reside in the views directory, and URL routing logic is implemented in the controller directory.
+
+:heavy_check_mark: 2. The index.php file effectively utilizes the Fat-Free framework for efficient URL routing, enhancing the overall functionality of the project.
+
+:heavy_check_mark: 3. The Datalayer class, defined within the datalayer.php file in the model directory, employs the PDO (PHP Data Objects) library along with prepared statements to execute SQL queries, ensuring secure and efficient database operations.
+
+:heavy_check_mark: 4. The application allows users to add books to the database. These books undergo an approval process by the administrator, after which they become visible on the web pages for users to access.
+
+:heavy_check_mark: 5. The project repository maintains a history of commits and incorporates meaningful comments, facilitating code collaboration and ensuring version control.
+
+:heavy_check_mark: 6. All class objects, including Book, Person, User, and Admin, are appropriately organized within the classes' directory. The User and Admin classes inherit from the Person class, promoting code reusability and maintaining a consistent class hierarchy.
+
+:heavy_check_mark: 7. Strict adherence to PEAR standards is observed, with all PHP files containing well-documented Docblocks. This practice enhances code readability, improves maintainability, and enables easier integration with development tools. 
+
+:heavy_check_mark: 8. Server-side validation techniques are employed to ensure data integrity and security, guaranteeing that all user inputs are thoroughly validated before processing.
+
+:heavy_check_mark: 9. The codebase is clean, concise, and accompanied by insightful comments that provide clarity and understanding of its purpose, promoting code maintainability and easing future enhancements or modifications.
+
+:heavy_check_mark: 10. The project has undergone comprehensive testing, resulting in a bug-free application where all pages function as intended, providing users with a seamless experience.
+
+## UML Class Diagram
+![secondHandBooks.png](..%2F..%2FsecondHandBooks.png)
+
+
+## ER Database Diagram
+![ER Diagram.png](..%2F..%2FER%20Diagram.png)
+
+
+## Admin login username and password
+Jokar.Mehdi@student.greenriver.edu
+$leep1ngDonutss
+
+## Book Owner login username and password
+jokar.mehdi2@gmail.com
+$leep1ngDonuts

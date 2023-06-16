@@ -20,8 +20,10 @@ $dataLayer = new DataLayer();
 // Create an instance for f3 object
 $f3 = Base::instance();
 $con = new Controller($f3);
+
+// Set our email as a constant
 $f3->OUR_EMAIL = 'jokar.mehdi@student.greenriver.edu';
-//$f3->start();
+
 
 
 // Define a default route for home
@@ -30,7 +32,7 @@ $f3->route('GET /', function() {
 });
 
 
-// Define a default route for home
+// Define a home route for home
 $f3->route('GET /home', function() {
     $GLOBALS['con']->home();
 });
